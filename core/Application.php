@@ -1,9 +1,14 @@
 <?php
 
+require_once "Router.php";
+
 class Application {
 
+    private Router $router;
+
     public function __construct() {
-        echo $_SERVER['REQUEST_URI'];
+        $this->router = new Router();
+        echo $this->router->route_dump();
     }
 
 }
