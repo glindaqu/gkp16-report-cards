@@ -2,13 +2,14 @@
 
 require_once "Router.php";
 
-class Application {
+class Application
+{
 
     private Router $router;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->router = new Router();
-        echo $this->router->route_dump();
     }
 
 }
