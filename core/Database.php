@@ -16,6 +16,11 @@ class Database
         $this->db = new mysqli($this->server_name, $this->user, $this->password, $this->db_name);
     }
 
+    public function __destruct()
+    {
+        $this->db->close();
+    }
+
     public function insert_employee(string $name, string $lastname, string $patronymic): void
     {
         $this->db->query("INSERT INTO employee(name, lastname, patronymic) VALUES ('$name', '$lastname', '$patronymic')");
@@ -32,8 +37,7 @@ class Database
     {
         $result = [];
         $response = $this->db->query("SELECT * FROM employee");
-        while ($item = $response->fetch_assoc()) 
-        {
+        while ($item = $response->fetch_assoc()) {
             $result[] = $item;
         }
         return $result;
@@ -43,8 +47,7 @@ class Database
     {
         $result = [];
         $response = $this->db->query("SELECT * FROM attendance");
-        while ($item = $response->fetch_assoc()) 
-        {
+        while ($item = $response->fetch_assoc()) {
             $result[] = $item;
         }
         return $result;
@@ -54,8 +57,7 @@ class Database
     {
         $result = [];
         $response = $this->db->query("SELECT * FROM attendance WHERE employee_id = $employee_id");
-        while ($item = $response->fetch_assoc()) 
-        {
+        while ($item = $response->fetch_assoc()) {
             $result[] = $item;
         }
         return $result;
