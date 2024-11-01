@@ -1,6 +1,7 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/controllers/StatisticController.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/controllers/AttendanceController.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/View.php";
 
 class Router
