@@ -7,7 +7,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/View.php";
 class Router
 {
     private string $controller = "statistic";
-    private string $action = "/";
+    private string $action = "index";
 
     public function __construct()
     {
