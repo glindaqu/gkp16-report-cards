@@ -23,4 +23,8 @@ class AttendanceModel extends Model {
         return $this->db->get_attendance_by_employee($id);
     }
 
+    public function get_by_id(int $row_id): array {
+        return $this->db->get_attendance_by_row_id($row_id);
+    }
+
 }

@@ -30,16 +30,20 @@
                     ?>
                     <div class="content_row__name"><?= $name ?></div>
                     <?php for ($i = 1; $i <= $days_count; $i++) { ?>
-                        <div class="content_row__date">
+                        <?php 
+                        $index = array_search($i, array_map(function ($item): string {
+                            return DateTime::createFromFormat("Y-m-d H:i:s", $item['income'])->format("d");
+                        }, $attendance_by_employee));
+                        ?>
+                        <div class="content_row__date" id="<?php echo $attendance_by_employee[$index]['id']  ?>">
                             <?php
-                            $index = array_search($i, array_map(function ($item): string {
-                                return DateTime::createFromFormat("Y-m-d H:i:s", $item['income'])->format("d");
-                            }, $attendance_by_employee));
                             if (is_numeric($index)) {
                                 $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['income']);
                                 $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['outcome']);
                                 $interval = $outcome_dt->diff($income_dt);
                                 echo $interval->h, ":", $interval->i;
+                            } else {
+                                echo 0;
                             }
                             ?>
                         </div>

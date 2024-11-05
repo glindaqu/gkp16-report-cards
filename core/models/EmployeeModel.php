@@ -22,4 +22,8 @@ class EmployeeModel extends Model
     {
         return $this->db->get_employes();
     }
+
+    public function get_by_id(int $id): array {
+        return $this->db->get_employee_by_id($id);
+    }
 }

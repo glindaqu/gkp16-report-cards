@@ -62,4 +62,15 @@ class Database
         }
         return $result;
     }
+
+    function get_attendance_by_row_id(int $id): array 
+    {
+        $response = $this->db->query("SELECT * FROM attendance WHERE id = $id");
+        return $response->fetch_assoc();
+    }
+
+    function get_employee_by_id(int $id): array {
+        $response = $this->db->query("SELECT * FROM employee WHERE id = $id");
+        return $response->fetch_assoc();
+    }
 }
