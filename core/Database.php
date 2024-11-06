@@ -73,4 +73,11 @@ class Database
         $response = $this->db->query("SELECT * FROM employee WHERE id = $id");
         return $response->fetch_assoc();
     }
+
+    public function update_attendance_by_id(DateTime $income, DateTime $outcome, int $attendance_id): void
+    {
+        $outcome_str = $outcome->format('Y-m-d H:i:s');
+        $income_str = $income->format('Y-m-d H:i:s');
+        $this->db->query("UPDATE attendance SET income='$income_str', outcome='$outcome_str' WHERE id=$attendance_id");
+    }
 }

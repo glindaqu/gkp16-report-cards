@@ -36,5 +36,7 @@ class AttendanceController extends Controller
         $outcome = DateTime::createFromFormat("Y-m-d H:i", "$date $outcome_time");
 
         $this->attendance_model->add($employee_id, $income, $outcome);
+
+        header("location: http://10.174.246.199/report/");
     }
 }

@@ -13,18 +13,23 @@ class Router
     {
         $params = [];
         $splitted = explode("/", $_SERVER['REQUEST_URI']);
-        $given_action = trim($splitted[3]);
         $given_controller = trim($splitted[2]);
 
-        if ($given_action !== "") {
+        $given_action = "";
+        
+        if (isset($splitted[3])) {
+            $given_action = trim($splitted[3]);
+        }
+        
+        if ($given_action !== '') {
             $this->action = $given_action;
         }
 
-        if ($given_controller !== "") {
+        if ($given_controller !== '') {
             $this->controller = $given_controller;
         }
 
-        if ($splitted[4]) {
+        if (isset($splitted[4])) {
             foreach (explode("&", $splitted[4]) as $param_str) {
                 $params[explode("=", $param_str)[0]] = explode("=", $param_str)[1];
             }

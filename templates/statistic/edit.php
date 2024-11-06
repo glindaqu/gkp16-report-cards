@@ -12,10 +12,11 @@
 
     <?php require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/header.php"; ?>
 
-    <form action="/report/attendance/add" method="post">
+    <form action="/report/statistic/rewrite" method="post">
+        <input name="attendance_id" value="<?=$row_id?>" style="display: none"/>
         <label>
             Имя сотрудника
-            <select name="employee_id" id="employee_pick">
+            <select id="employee_pick">
                 <option value="<?= $row['employee_id'] ?>"> <?= $name ?> </option>
             </select>
         </label>

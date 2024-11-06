@@ -32,6 +32,25 @@ class StatisticController extends Controller
         $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $row['income']);
         $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $row['outcome']);
 
+        ob_start();
         require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/statistic/edit.php";
+        $content = ob_get_contents();
+        ob_end_clean();
+        echo $content;
+    }
+
+    function rewrite(): void {
+        $income_time = $_POST['income'];
+        $outcome_time = $_POST['outcome'];
+        $attendance_id = $_POST['attendance_id'];
+
+        $date = date("Y-m-d");
+
+        $income = DateTime::createFromFormat("Y-m-d H:i", "$date $income_time");
+        $outcome = DateTime::createFromFormat("Y-m-d H:i", "$date $outcome_time");
+
+        $this->attendance_model->update($attendance_id, $income, $outcome);
+
+        header("location: http://10.174.246.199/report/");
     }
 }

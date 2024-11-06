@@ -7,7 +7,6 @@
     display: flex;
     flex-direction: column;
     overflow: scroll;
-    gap: 10px;
     margin-top: 1%;
 }
 
@@ -37,4 +36,39 @@
     text-align: center;
     height: 60px;
     line-height: 60px;
+    border:  0.1px solid rgba(0, 0, 0, 0.097);
+}
+
+
+.menu {
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #363535;
+    padding: 10px;
+}
+
+.item {
+    padding: 10px 20px;
+    font-size: 20px;
+    color: #c1c1c1;
+    transition: all 0.5s;
+    border-radius: 5px;
+}
+
+.item:hover {
+    background-color: black;
+    transition: all 0.5s;
+}
+
+.hidden {
+    display: none !important;
 }

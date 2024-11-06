@@ -27,4 +27,8 @@ class AttendanceModel extends Model {
         return $this->db->get_attendance_by_row_id($row_id);
     }
 
+    function update(int $id, DateTime $in, DateTime $out): void {
+        $this->db->update_attendance_by_id($in, $out, $id);
+    }
+
 }
