@@ -43,10 +43,12 @@ class Database
         return $result;
     }
 
-    function get_attendance(): array
+    function get_attendance(int $month): array
     {
+        $days_count = cal_days_in_month(CAL_GREGORIAN, $month, date("Y")); 
+        $year = date("Y");
         $result = [];
-        $response = $this->db->query("SELECT * FROM attendance");
+        $response = $this->db->query("SELECT * FROM attendance WHERE income BETWEEN '$year-$month-01' AND '$year-$month-$days_count'");
         while ($item = $response->fetch_assoc()) {
             $result[] = $item;
         }

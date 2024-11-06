@@ -18,43 +18,50 @@
             <div class="item">Редактировать</div>
         </div>
         <div class="content">
-            <div class="content_header">
-                <?php for ($i = 1; $i <= $days_count; $i++) { ?>
-                    <div class="content_row__date"><?= $i ?></div>
+            <select class="month_pick">
+                <?php foreach ($months as $id => $month) { ?>
+                    <option value="<?= $id ?>" <?= $id == $current_month ? 'selected' : '' ?>><?= $month ?></option>
                 <?php } ?>
-            </div>
-            <?php foreach ($employes as $employee) { ?>
-                <div class="content_row">
-                    <?php
-                    $name = $employee['lastname'] . " " . $employee['name'] . " " . $employee['patronymic'];
-                    $attendance_by_employee = array_filter($attendance, function ($item) use ($employee): bool {
-                        return $item['employee_id'] == $employee['id'];
-                    });
-                    ?>
-                    <div class="content_row__name"><?= $name ?></div>
+            </select>
+            <div class="table_body">
+                <div class="content_header">
                     <?php for ($i = 1; $i <= $days_count; $i++) { ?>
-                        <?php
-                        $index = array_search($i, array_map(function ($item): string {
-                            return DateTime::createFromFormat("Y-m-d H:i:s", $item['income'])->format("d");
-                        }, $attendance_by_employee));
-                        $div_id = '';
-                        if (isset(($attendance_by_employee[$index]['id']))) {
-                            $div_id = $attendance_by_employee[$index]['id'];
-                        }
-                        ?>
-                        <div class="content_row__date" id="<?= $div_id ?>">
-                            <?php
-                            if (is_numeric($index)) {
-                                $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['income']);
-                                $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['outcome']);
-                                $interval = $outcome_dt->diff($income_dt);
-                                echo $interval->h, ":", $interval->i;
-                            }
-                            ?>
-                        </div>
+                        <div class="content_row__date"><?= $i ?></div>
                     <?php } ?>
                 </div>
-            <?php } ?>
+                <?php foreach ($employes as $employee) { ?>
+                    <div class="content_row">
+                        <?php
+                        $name = $employee['lastname'] . " " . $employee['name'] . " " . $employee['patronymic'];
+                        $attendance_by_employee = array_filter($attendance, function ($item) use ($employee): bool {
+                            return $item['employee_id'] == $employee['id'];
+                        });
+                        ?>
+                        <div class="content_row__name"><?= $name ?></div>
+                        <?php for ($i = 1; $i <= $days_count; $i++) { ?>
+                            <?php
+                            $index = array_search($i, array_map(function ($item): string {
+                                return DateTime::createFromFormat("Y-m-d H:i:s", $item['income'])->format("d");
+                            }, $attendance_by_employee));
+                            $div_id = '';
+                            if (isset(($attendance_by_employee[$index]['id']))) {
+                                $div_id = $attendance_by_employee[$index]['id'];
+                            }
+                            ?>
+                            <div class="content_row__date" id="<?= $div_id ?>">
+                                <?php
+                                if (is_numeric($index)) {
+                                    $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['income']);
+                                    $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['outcome']);
+                                    $interval = $outcome_dt->diff($income_dt);
+                                    echo $interval->h, ":", $interval->i;
+                                }
+                                ?>
+                            </div>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+            </div>
         </div>
     </div>
 
@@ -85,6 +92,13 @@
 
         document.querySelector(".item").addEventListener("click", () => {
             window.location.replace(`http://10.174.246.199/report/statistic/edit/id=${lastClickedId}`)
+        });
+
+        document.querySelector(".month_pick").addEventListener("change", () => {
+            let e = document.querySelector(".month_pick");
+            let value = e.options[e.selectedIndex].value;
+            window.location = "http://10.174.246.199/report/statistic/index/month=" + value;
+            console.log(value);
         });
     </script>
 </body>

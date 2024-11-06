@@ -15,8 +15,8 @@ class AttendanceModel extends Model {
         $this->db->insert_attendance($in, $out, $employee_id);
     }
 
-    public function get_all(): array {
-        return $this->db->get_attendance();
+    public function get_all(int $month): array {
+        return $this->db->get_attendance($month);
     }
 
     public function get_by_employee(int $id): array {

@@ -6,15 +6,19 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
     margin-top: 1%;
 }
 
 .content_header {
-    margin-left: 300px;
+    margin-left: 10px;
+    padding-left: 290px;
     display: flex;
     width: fit-content;
     background-color: rgb(237, 237, 237);
+}
+
+.table_body {
+    overflow: scroll;
 }
 
 .content_row {
@@ -25,10 +29,12 @@
 
 .content_row__name {
     margin-left: 10px;
-    width: 290px;
+    width: 279px;
     text-align: start;
     height: 60px;
+    border:  0.1px solid rgba(0, 0, 0, 0.097);
     line-height: 60px;
+    padding-left: 10px;
 }
 
 .content_row__date {
@@ -71,4 +77,10 @@
 
 .hidden {
     display: none !important;
+}
+
+.month_pick {
+    width: 20%;
+    padding: 5px 10px;
+    margin: 2% 1%;
 }

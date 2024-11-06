@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/View.php";
 
 class StatisticView extends View
 {
-    public function index(array $employes, array $attendance): void
+    public function index(array $employes, array $attendance, array $months, int $current_month): void
     {
         ob_start();
         require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/statistic/index.php";
