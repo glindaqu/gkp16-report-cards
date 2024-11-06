@@ -51,16 +51,12 @@ class StatisticController extends Controller
         $row_id = $params['id'];
         $row = $this->attendance_model->get_by_id($row_id);
         $employee = $this->employee_model->get_by_id($row['employee_id']);
-        
+
         $name = $employee['lastname'] . " " . $employee['name'] . " " . $employee['patronymic'];
         $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $row['income']);
         $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $row['outcome']);
 
-        ob_start();
-        require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/statistic/edit.php";
-        $content = ob_get_contents();
-        ob_end_clean();
-        echo $content;
+        $this->view->edit($name, $income_dt, $outcome_dt, $row);
     }
 
     function rewrite(): void

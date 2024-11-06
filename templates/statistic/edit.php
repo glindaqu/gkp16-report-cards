@@ -13,7 +13,7 @@
     <?php require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/header.php"; ?>
 
     <form action="/report/statistic/rewrite" method="post">
-        <input name="attendance_id" value="<?=$row_id?>" style="display: none"/>
+        <input name="attendance_id" value="<?= $row['id'] ?>" style="display: none"/>
         <label>
             Имя сотрудника
             <select id="employee_pick">

@@ -12,4 +12,13 @@ class StatisticView extends View
         ob_end_clean();
         echo $content;
     }
+
+    public function edit(string $name, DateTime $income_dt, DateTime $outcome_dt, array $row): void 
+    {
+        ob_start();
+        require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/statistic/edit.php";
+        $content = ob_get_contents();
+        ob_end_clean();
+        echo $content;
+    }
 }
