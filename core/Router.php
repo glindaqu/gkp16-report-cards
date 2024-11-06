@@ -2,6 +2,7 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/controllers/StatisticController.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/controllers/AttendanceController.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/controllers/AuthorizeController.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/View.php";
 
 class Router
@@ -16,11 +17,11 @@ class Router
         $given_controller = trim($splitted[2]);
 
         $given_action = "";
-        
+
         if (isset($splitted[3])) {
             $given_action = trim($splitted[3]);
         }
-        
+
         if ($given_action !== '') {
             $this->action = $given_action;
         }
@@ -45,9 +46,14 @@ class Router
             View::page_not_found();
             exit;
         }
-        $controller = new $path();
-        $action = $this->action;
-        $controller->$action($params);
+        if (!AuthorizeController::has_auth()) {
+            $controller = new AuthorizeController();
+            $controller->auth();
+        } else {
+            $controller = new $path();
+            $action = $this->action;
+            $controller->$action($params);
+        }
     }
 
     public function route_dump(): string

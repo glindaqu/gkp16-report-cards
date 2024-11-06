@@ -82,4 +82,8 @@ class Database
         $income_str = $income->format('Y-m-d H:i:s');
         $this->db->query("UPDATE attendance SET income='$income_str', outcome='$outcome_str' WHERE id=$attendance_id");
     }
+
+    public function get_user_by_login_and_password(string $login, string $password): array {
+        return $this->db->query("SELECT * FROM users WHERE login='$login' AND password='$password' LIMIT 1")->fetch_assoc();
+    }
 }
