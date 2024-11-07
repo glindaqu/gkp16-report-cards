@@ -18,20 +18,25 @@ class Router
 
         $given_action = "";
 
-        if (isset($splitted[3])) {
+        if (isset($splitted[3])) 
+        {
             $given_action = trim($splitted[3]);
         }
 
-        if ($given_action !== '') {
+        if ($given_action !== '') 
+        {
             $this->action = $given_action;
         }
 
-        if ($given_controller !== '') {
+        if ($given_controller !== '') 
+        {
             $this->controller = $given_controller;
         }
 
-        if (isset($splitted[4])) {
-            foreach (explode("&", $splitted[4]) as $param_str) {
+        if (isset($splitted[4])) 
+        {
+            foreach (explode("&", $splitted[4]) as $param_str) 
+            {
                 $params[explode("=", $param_str)[0]] = explode("=", $param_str)[1];
             }
         }
@@ -42,15 +47,19 @@ class Router
     public function navigate(array $params): void
     {
         $path = ucfirst($this->controller . 'Controller');
-        if (!class_exists($path) || !method_exists($path, $this->action)) {
+        if (!class_exists($path) || !method_exists($path, $this->action)) 
+        {
             View::page_not_found();
             exit;
         }
-        if ($path == "AuthorizeController" || AuthorizeController::has_auth()) {
+        if ($path == "AuthorizeController" || AuthorizeController::has_auth()) 
+        {
             $controller = new $path();
             $action = $this->action;
             $controller->$action($params);
-        } else {
+        } 
+        else 
+        {
             $controller = new AuthorizeController();
             $controller->auth();
         }

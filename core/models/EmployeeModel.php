@@ -5,7 +5,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/Database.php";
 
 class EmployeeModel extends Model
 {
-
     private Database $db;
 
     public function __construct()
@@ -23,7 +22,8 @@ class EmployeeModel extends Model
         return $this->db->get_employes();
     }
 
-    public function get_by_id(int $id): array {
+    public function get_by_id(int $id): array 
+    {
         return $this->db->get_employee_by_id($id);
     }
 }

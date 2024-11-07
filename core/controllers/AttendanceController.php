@@ -13,7 +13,6 @@ class AttendanceController extends Controller
     private AttendanceModel $attendance_model;
     private UserModel $user_model;
 
-
     public function __construct()
     {
         $this->view = new AttendanceView();
@@ -32,17 +31,14 @@ class AttendanceController extends Controller
         $income_time = $_POST['income'];
         $outcome_time = $_POST['outcome'];
         $employee_id = $_POST['employee_id'];
-
         $date = date("Y-m-d");
-        if (isset($_POST['date'])) {
+        if (isset($_POST['date'])) 
+        {
             $date = $_POST['date'];
         }
-
         $income = DateTime::createFromFormat("Y-m-d H:i", "$date $income_time");
         $outcome = DateTime::createFromFormat("Y-m-d H:i", "$date $outcome_time");
-
         $this->attendance_model->add($employee_id, $income, $outcome);
-
         header("location: http://10.174.246.199/report/");
     }
 }

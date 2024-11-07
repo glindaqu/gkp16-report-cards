@@ -38,7 +38,8 @@ class Database
         $chief_id = $_COOKIE['user_id'];
         $result = [];
         $response = $this->db->query("SELECT * FROM employee WHERE chief_id=$chief_id");
-        while ($response && $item = $response->fetch_assoc()) {
+        while ($response && $item = $response->fetch_assoc()) 
+        {
             $result[] = $item;
         }
         return $result;
@@ -50,7 +51,8 @@ class Database
         $year = date("Y");
         $result = [];
         $response = $this->db->query("SELECT * FROM attendance WHERE income BETWEEN '$year-$month-01' AND '$year-$month-$days_count'");
-        while ($item = $response->fetch_assoc()) {
+        while ($item = $response->fetch_assoc()) 
+        {
             $result[] = $item;
         }
         return $result;
@@ -60,7 +62,8 @@ class Database
     {
         $result = [];
         $response = $this->db->query("SELECT * FROM attendance WHERE employee_id = $employee_id");
-        while ($item = $response->fetch_assoc()) {
+        while ($item = $response->fetch_assoc()) 
+        {
             $result[] = $item;
         }
         return $result;
@@ -72,7 +75,8 @@ class Database
         return $response->fetch_assoc();
     }
 
-    function get_employee_by_id(int $id): array {
+    function get_employee_by_id(int $id): array 
+    {
         $response = $this->db->query("SELECT * FROM employee WHERE id = $id");
         return $response->fetch_assoc();
     }
@@ -84,11 +88,13 @@ class Database
         $this->db->query("UPDATE attendance SET income='$income_str', outcome='$outcome_str' WHERE id=$attendance_id");
     }
 
-    public function get_user_by_login_and_password(string $login, string $password): array {
+    public function get_user_by_login_and_password(string $login, string $password): array 
+    {
         return $this->db->query("SELECT * FROM users WHERE login='$login' AND password='$password' LIMIT 1")->fetch_assoc();
     }
 
-    public function get_role_by_user_id(int $id): string {
+    public function get_role_by_user_id(int $id): string 
+    {
         return $this->db->query("SELECT role FROM users WHERE id=$id LIMIT 1")->fetch_assoc()['role'];
     }
 }

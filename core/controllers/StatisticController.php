@@ -35,7 +35,8 @@ class StatisticController extends Controller
             12 => 'Декабрь'
         ];
         $month = date("m");
-        if (isset($params['month'])) {
+        if (isset($params['month'])) 
+        {
             $month = $params['month'];
         }
         $this->view->index(
