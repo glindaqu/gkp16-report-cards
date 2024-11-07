@@ -22,6 +22,12 @@
                 <?php } ?>
             </select>
         </label>
+        <?php if ($role == 'admin') { ?>
+            <label>
+                Дата
+                <input type="date" name="date" id="date" />
+            </label>
+        <?php } ?>
         <label>
             Время прихода
             <input type="time" name="income" id="income" />

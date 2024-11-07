@@ -19,4 +19,8 @@ class UserModel extends Model {
         return null;
     }
 
+    public function get_role(int $id): string {
+        return $this->db->get_role_by_user_id($id);
+    }
+
 }

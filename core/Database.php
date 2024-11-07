@@ -35,9 +35,10 @@ class Database
 
     function get_employes(): array
     {
+        $chief_id = $_COOKIE['user_id'];
         $result = [];
-        $response = $this->db->query("SELECT * FROM employee");
-        while ($item = $response->fetch_assoc()) {
+        $response = $this->db->query("SELECT * FROM employee WHERE chief_id=$chief_id");
+        while ($response && $item = $response->fetch_assoc()) {
             $result[] = $item;
         }
         return $result;
@@ -85,5 +86,9 @@ class Database
 
     public function get_user_by_login_and_password(string $login, string $password): array {
         return $this->db->query("SELECT * FROM users WHERE login='$login' AND password='$password' LIMIT 1")->fetch_assoc();
+    }
+
+    public function get_role_by_user_id(int $id): string {
+        return $this->db->query("SELECT role FROM users WHERE id=$id LIMIT 1")->fetch_assoc()['role'];
     }
 }
