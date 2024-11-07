@@ -12,6 +12,10 @@ class AuthorizeView extends View {
     }
 
     public function error(): void {
-
+        ob_start();
+        require $_SERVER['DOCUMENT_ROOT'] . '/report/templates/auth/error.php';
+        $content = ob_get_contents();
+        ob_end_clean();
+        echo $content;
     }
 }

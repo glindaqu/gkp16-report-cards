@@ -23,7 +23,7 @@ class AuthorizeController extends Controller {
         $this->view->error();
     }
 
-    public function check_data(): void {
+    public function check(): void {
         if (!isset($_POST['password']) || !isset($_POST['login'])) {
             $this->error();
             exit;
@@ -37,13 +37,19 @@ class AuthorizeController extends Controller {
             exit;
         }
 
-        setcookie('user_id', $user['id'], time() + 3600 * 3);
+        setcookie(
+            'user_id', 
+            $user['id'], 
+            time() + 3600 * 3, 
+            "/"
+        );
+        header("location: http://10.174.246.199/report/");
     }
 
-    public static function has_auth(): bool {
+    public static function has_auth(): int {
         if (isset($_COOKIE['user_id'])) {
-            return true;
+            return 1;
         }
-        return false;
+        return 0;
     }
 }

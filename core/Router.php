@@ -46,13 +46,13 @@ class Router
             View::page_not_found();
             exit;
         }
-        if (!AuthorizeController::has_auth()) {
-            $controller = new AuthorizeController();
-            $controller->auth();
-        } else {
+        if ($path == "AuthorizeController" || AuthorizeController::has_auth()) {
             $controller = new $path();
             $action = $this->action;
             $controller->$action($params);
+        } else {
+            $controller = new AuthorizeController();
+            $controller->auth();
         }
     }
 
