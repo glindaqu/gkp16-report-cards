@@ -31,20 +31,24 @@
     margin-left: 10px;
     width: 279px;
     text-align: start;
-    height: 60px;
+    height: 70px;
     border:  0.1px solid rgba(0, 0, 0, 0.097);
-    line-height: 60px;
     padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .content_row__date {
-    width: 60px;
+    width: 120px;
     text-align: center;
-    height: 60px;
-    line-height: 60px;
+    align-items: center;
+    height: 70px;
     border:  0.1px solid rgba(0, 0, 0, 0.097);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
-
 
 .menu {
     position: absolute;
@@ -83,4 +87,20 @@
     width: 20%;
     padding: 5px 10px;
     margin: 2% 1%;
+}
+
+.time_section {
+    display: flex;
+    width: min-content;
+    height: min-content;
+    gap: 10px;
+}
+
+.outcome, 
+.income {
+    font-size: 0.9em;
+}
+
+.ip {
+    font-size: 0.8em;
 }

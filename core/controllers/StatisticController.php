@@ -35,16 +35,20 @@ class StatisticController extends Controller
             12 => 'Декабрь'
         ];
         $month = date("m");
-        if (isset($params['month'])) 
-        {
+        if (isset($params['month'])) {
             $month = $params['month'];
         }
-        $this->view->index(
-            $this->user_model->get_users(), 
-            $this->attendance_model->get_attendances($month), 
-            $months,
-            $month
-        );
+        $role = $this->user_model->get_user_role($_COOKIE['user_id']);
+        if ($role == "admin") {
+            $this->view->admin(
+                $this->user_model->get_users(),
+                $this->attendance_model->get_attendances($month),
+                $months,
+                $month
+            );
+        } else if ($role == "employee") {
+            $this->view->user();
+        }
     }
 
     function edit(array $params): void
