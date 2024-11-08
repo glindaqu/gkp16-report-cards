@@ -11,7 +11,7 @@
 <body>
 
     <?php require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/header.php"; ?>
-    <?php $days_count = cal_days_in_month(CAL_GREGORIAN, date("m"), date("Y")); ?>
+    <?php $days_count = cal_days_in_month(CAL_GREGORIAN, $current_month, date("Y")); ?>
 
     <div class="container">
         <div class="menu hidden">
@@ -37,7 +37,7 @@
                             return $item['employee_id'] == $employee['id'];
                         });
                         ?>
-                        <div class="content_row__name"><?= $name ?></div>
+                        <div class="content_row__name"><div class="name"><?= $name ?></div></div>
                         <?php for ($i = 1; $i <= $days_count; $i++) { ?>
                             <?php
                             $index = array_search($i, array_map(function ($item): string {
@@ -54,9 +54,16 @@
                                     $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['income']);
                                     $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['outcome']);
                                     $interval = $outcome_dt->diff($income_dt);
-                                    echo $interval->h, ":", $interval->i;
-                                }
-                                ?>
+                                    ?>
+                                    <div class="time_section">
+                                        <div class="income"><?= $income_dt->format("H:i") ?> </div>
+                                        <div class="outcome"><?= $outcome_dt->format("H:i") ?></div>
+                                    </div>
+                                    <?= sprintf("%02d:%02d", $interval->h, $interval->i) ?>
+                                    <div class="ip">
+                                        <?= $attendance_by_employee[$index]['ip_address'] ?>
+                                    </div>
+                                <?php } ?>
                             </div>
                         <?php } ?>
                     </div>

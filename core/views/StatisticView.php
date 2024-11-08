@@ -4,10 +4,19 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/View.php";
 
 class StatisticView extends View
 {
-    public function index(array $employes, array $attendance, array $months, int $current_month): void
+    public function admin(array $employes, array $attendance, array $months, int $current_month): void
     {
         ob_start();
-        require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/statistic/index.php";
+        require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/statistic/admin.php";
+        $content = ob_get_contents();
+        ob_end_clean();
+        echo $content;
+    }
+
+    public function user(): void 
+    {
+        ob_start();
+        require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/statistic/user.php";
         $content = ob_get_contents();
         ob_end_clean();
         echo $content;
