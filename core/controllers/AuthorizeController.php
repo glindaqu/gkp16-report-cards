@@ -34,7 +34,7 @@ class AuthorizeController extends Controller
         }
         $login = $_POST['login'];
         $password = $_POST['password'];
-        if (!($user = $this->user_model->check_user($login, $password))) 
+        if (!($user = $this->user_model->get_user($login, $password))) 
         {
             $this->error();
             exit;

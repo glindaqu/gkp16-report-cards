@@ -21,11 +21,48 @@ class Database
         $this->db->close();
     }
 
-    public function insert_employee(string $name, string $lastname, string $patronymic): void
+    #region users
+    public function insert_user(string $name, 
+                                string $lastname, 
+                                string $patronymic, 
+                                string $login, 
+                                string $role, 
+                                string $password): void 
     {
-        $this->db->query("INSERT INTO employee(name, lastname, patronymic) VALUES ('$name', '$lastname', '$patronymic')");
+        $this->db->query("INSERT INTO 
+                            users(name, lastname, patronymic, login, role, password) 
+                         VALUES ('$name', '$lastname', '$patronymic', '$login', '$role', '$password')");
     }
 
+    public function get_users(): array
+    {
+        $result = [];
+        $response = $this->db->query("SELECT * FROM users");
+        while ($response && $item = $response->fetch_assoc())
+        {
+            $result[] = $item;
+        }
+        return $result;
+    }
+
+    public function get_user_role(int $user_id): string 
+    {
+        return $this->db->query("SELECT role FROM users WHERE id=$user_id LIMIT 1")->fetch_assoc()['role'];
+    }   
+
+    public function get_user_by_id(int $id): array 
+    {
+        $response = $this->db->query("SELECT * FROM employee WHERE id = $id");
+        return $response->fetch_assoc();
+    }
+
+    public function get_user(string $login, string $password): array 
+    {
+        return $this->db->query("SELECT * FROM users WHERE login='$login' AND password='$password' LIMIT 1")->fetch_assoc();
+    }
+    #endregion users
+
+    #region attendance
     public function insert_attendance(DateTime $income, DateTime $outcome, int $employee_id): void
     {
         $ip = $_SERVER['REMOTE_ADDR'];
@@ -35,19 +72,7 @@ class Database
             ('$income_str', '$outcome_str', $employee_id, '$ip')");
     }
 
-    function get_employes(): array
-    {
-        $chief_id = $_COOKIE['user_id'];
-        $result = [];
-        $response = $this->db->query("SELECT * FROM employee WHERE chief_id=$chief_id");
-        while ($response && $item = $response->fetch_assoc()) 
-        {
-            $result[] = $item;
-        }
-        return $result;
-    }
-
-    function get_attendance(int $month): array
+    public function get_attendance(int $month): array
     {
         $days_count = cal_days_in_month(CAL_GREGORIAN, $month, date("Y")); 
         $year = date("Y");
@@ -60,10 +85,10 @@ class Database
         return $result;
     }
 
-    function get_attendance_by_employee(int $employee_id): array
+    public function get_attendance_by_user(int $user_id): array
     {
         $result = [];
-        $response = $this->db->query("SELECT * FROM attendance WHERE employee_id = $employee_id");
+        $response = $this->db->query("SELECT * FROM attendance WHERE user_id = $user_id");
         while ($item = $response->fetch_assoc()) 
         {
             $result[] = $item;
@@ -71,15 +96,9 @@ class Database
         return $result;
     }
 
-    function get_attendance_by_row_id(int $id): array 
+    public function get_attendance_by_id(int $id): array 
     {
         $response = $this->db->query("SELECT * FROM attendance WHERE id = $id");
-        return $response->fetch_assoc();
-    }
-
-    function get_employee_by_id(int $id): array 
-    {
-        $response = $this->db->query("SELECT * FROM employee WHERE id = $id");
         return $response->fetch_assoc();
     }
 
@@ -89,14 +108,5 @@ class Database
         $income_str = $income->format('Y-m-d H:i:s');
         $this->db->query("UPDATE attendance SET income='$income_str', outcome='$outcome_str' WHERE id=$attendance_id");
     }
-
-    public function get_user_by_login_and_password(string $login, string $password): array 
-    {
-        return $this->db->query("SELECT * FROM users WHERE login='$login' AND password='$password' LIMIT 1")->fetch_assoc();
-    }
-
-    public function get_role_by_user_id(int $id): string 
-    {
-        return $this->db->query("SELECT role FROM users WHERE id=$id LIMIT 1")->fetch_assoc()['role'];
-    }
+    #endregion attendance
 }

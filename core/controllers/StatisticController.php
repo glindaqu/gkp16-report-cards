@@ -2,19 +2,19 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/views/StatisticView.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/Controller.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/models/EmployeeModel.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/models/UserModel.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/models/AttendanceModel.php";
 
 class StatisticController extends Controller
 {
-    private EmployeeModel $employee_model;
+    private UserModel $user_model;
     private AttendanceModel $attendance_model;
     private StatisticView $view;
 
     public function __construct()
     {
         $this->view = new StatisticView();
-        $this->employee_model = new EmployeeModel();
+        $this->user_model = new UserModel();
         $this->attendance_model = new AttendanceModel();
     }
 
@@ -40,8 +40,8 @@ class StatisticController extends Controller
             $month = $params['month'];
         }
         $this->view->index(
-            $this->employee_model->get_all(), 
-            $this->attendance_model->get_all($month), 
+            $this->user_model->get_users(), 
+            $this->attendance_model->get_attendances($month), 
             $months,
             $month
         );
@@ -50,8 +50,8 @@ class StatisticController extends Controller
     function edit(array $params): void
     {
         $row_id = $params['id'];
-        $row = $this->attendance_model->get_by_id($row_id);
-        $employee = $this->employee_model->get_by_id($row['employee_id']);
+        $row = $this->attendance_model->get_attendances_by_id($row_id);
+        $employee = $this->user_model->get_user_by_id($row['employee_id']);
 
         $name = $employee['lastname'] . " " . $employee['name'] . " " . $employee['patronymic'];
         $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $row['income']);
