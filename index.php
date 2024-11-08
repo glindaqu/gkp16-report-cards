@@ -5,7 +5,7 @@ require_once "core/Application.php";
 /**
  * @var bool
  */
-const IS_DEBUG = TRUE;
+const IS_DEBUG = FALSE;
 
 if (IS_DEBUG) 
 {

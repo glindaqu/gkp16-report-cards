@@ -28,9 +28,11 @@ class Database
 
     public function insert_attendance(DateTime $income, DateTime $outcome, int $employee_id): void
     {
+        $ip = $_SERVER['REMOTE_ADDR'];
         $outcome_str = $outcome->format('Y-m-d H:i:s');
         $income_str = $income->format('Y-m-d H:i:s');
-        $this->db->query("INSERT INTO attendance(income, outcome, employee_id) VALUES ('$income_str', '$outcome_str', $employee_id)");
+        $this->db->query("INSERT INTO attendance(income, outcome, employee_id, ip_address) VALUES 
+            ('$income_str', '$outcome_str', $employee_id, '$ip')");
     }
 
     function get_employes(): array
