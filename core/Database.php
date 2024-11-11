@@ -52,7 +52,7 @@ class Database
 
     public function get_user_by_id(int $id): array 
     {
-        $response = $this->db->query("SELECT * FROM employee WHERE id = $id");
+        $response = $this->db->query("SELECT * FROM users WHERE id = $id");
         return $response->fetch_assoc();
     }
 

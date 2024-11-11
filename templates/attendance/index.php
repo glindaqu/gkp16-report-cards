@@ -11,15 +11,13 @@
 <body>
 
     <?php require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/header.php"; ?>
+    <?php $name = $employee['lastname'] . " " . $employee['name'] . " " . $employee['patronymic']; ?>
 
     <form action="/report/attendance/add" method="post">
         <label>
             Имя сотрудника
             <select name="employee_id" id="employee_pick">
-                <?php foreach ($employes as $emp) { ?>
-                    <?php $name = $emp['lastname'] . " " . $emp['name'] . " " . $emp['patronymic']; ?>
-                    <option value="<?= $emp['id'] ?>"> <?= $name ?> </option>
-                <?php } ?>
+                <option value="<?= $employee['id'] ?>"> <?= $name ?> </option>
             </select>
         </label>
         <?php if ($role == 'admin') { ?>
