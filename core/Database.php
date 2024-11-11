@@ -85,10 +85,12 @@ class Database
         return $result;
     }
 
-    public function get_attendance_by_user(int $user_id): array
+    public function get_attendance_by_user(int $user_id, int $month): array
     {
+        $days_count = cal_days_in_month(CAL_GREGORIAN, $month, date("Y")); 
+        $year = date("Y");
         $result = [];
-        $response = $this->db->query("SELECT * FROM attendance WHERE employee_id = $user_id");
+        $response = $this->db->query("SELECT * FROM attendance WHERE employee_id = $user_id AND income BETWEEN '$year-$month-01' AND '$year-$month-$days_count'");
         while ($response && $item = $response->fetch_assoc()) 
         {
             $result[] = $item;

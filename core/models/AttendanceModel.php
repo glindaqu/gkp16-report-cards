@@ -22,9 +22,9 @@ class AttendanceModel extends Model
         return $this->db->get_attendance($month);
     }
 
-    public function get_attendances_by_user(int $user_id): array 
+    public function get_attendances_by_user(int $user_id, int $month): array 
     {
-        return $this->db->get_attendance_by_user($user_id);
+        return $this->db->get_attendance_by_user($user_id, $month);
     }
 
     public function get_attendances_by_id(int $row_id): array 

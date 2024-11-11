@@ -48,7 +48,7 @@ class StatisticController extends Controller
             );
         } else if ($role == "employee") {
             $this->view->user(
-                $this->attendance_model->get_attendances_by_user($_COOKIE['user_id']),
+                $this->attendance_model->get_attendances_by_user($_COOKIE['user_id'], $month),
                 $months,
                 $month
             );
