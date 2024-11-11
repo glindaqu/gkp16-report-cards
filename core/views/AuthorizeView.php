@@ -2,9 +2,9 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/View.php";
 
-class AuthorizeView extends View 
+class AuthorizeView extends View
 {
-    public function auth(): void 
+    public function auth(): void
     {
         ob_start();
         require $_SERVER['DOCUMENT_ROOT'] . '/report/templates/auth/index.php';
@@ -13,7 +13,7 @@ class AuthorizeView extends View
         echo $content;
     }
 
-    public function error(): void 
+    public function error(): void
     {
         ob_start();
         require $_SERVER['DOCUMENT_ROOT'] . '/report/templates/auth/error.php';

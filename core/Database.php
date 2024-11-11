@@ -22,13 +22,14 @@ class Database
     }
 
     #region users
-    public function insert_user(string $name, 
-                                string $lastname, 
-                                string $patronymic, 
-                                string $login, 
-                                string $role, 
-                                string $password): void 
-    {
+    public function insert_user(
+        string $name,
+        string $lastname,
+        string $patronymic,
+        string $login,
+        string $role,
+        string $password
+    ): void {
         $this->db->query("INSERT INTO 
                             users(name, lastname, patronymic, login, role, password) 
                          VALUES ('$name', '$lastname', '$patronymic', '$login', '$role', '$password')");
@@ -38,25 +39,24 @@ class Database
     {
         $result = [];
         $response = $this->db->query("SELECT * FROM users");
-        while ($response && $item = $response->fetch_assoc())
-        {
+        while ($response && $item = $response->fetch_assoc()) {
             $result[] = $item;
         }
         return $result;
     }
 
-    public function get_user_role(int $user_id): string 
+    public function get_user_role(int $user_id): string
     {
         return $this->db->query("SELECT role FROM users WHERE id=$user_id LIMIT 1")->fetch_assoc()['role'];
-    }   
+    }
 
-    public function get_user_by_id(int $id): array 
+    public function get_user_by_id(int $id): array
     {
         $response = $this->db->query("SELECT * FROM users WHERE id = $id");
         return $response->fetch_assoc();
     }
 
-    public function get_user(string $login, string $password): array 
+    public function get_user(string $login, string $password): array
     {
         return $this->db->query("SELECT * FROM users WHERE login='$login' AND password='$password' LIMIT 1")->fetch_assoc();
     }
@@ -74,12 +74,11 @@ class Database
 
     public function get_attendance(int $month): array
     {
-        $days_count = cal_days_in_month(CAL_GREGORIAN, $month, date("Y")); 
+        $days_count = cal_days_in_month(CAL_GREGORIAN, $month, date("Y"));
         $year = date("Y");
         $result = [];
         $response = $this->db->query("SELECT * FROM attendance WHERE income BETWEEN '$year-$month-01' AND '$year-$month-$days_count'");
-        while ($item = $response->fetch_assoc()) 
-        {
+        while ($item = $response->fetch_assoc()) {
             $result[] = $item;
         }
         return $result;
@@ -87,18 +86,17 @@ class Database
 
     public function get_attendance_by_user(int $user_id, int $month): array
     {
-        $days_count = cal_days_in_month(CAL_GREGORIAN, $month, date("Y")); 
+        $days_count = cal_days_in_month(CAL_GREGORIAN, $month, date("Y"));
         $year = date("Y");
         $result = [];
         $response = $this->db->query("SELECT * FROM attendance WHERE employee_id = $user_id AND income BETWEEN '$year-$month-01' AND '$year-$month-$days_count'");
-        while ($response && $item = $response->fetch_assoc()) 
-        {
+        while ($response && $item = $response->fetch_assoc()) {
             $result[] = $item;
         }
         return $result;
     }
 
-    public function get_attendance_by_id(int $id): array 
+    public function get_attendance_by_id(int $id): array
     {
         $response = $this->db->query("SELECT * FROM attendance WHERE id = $id");
         return $response->fetch_assoc();

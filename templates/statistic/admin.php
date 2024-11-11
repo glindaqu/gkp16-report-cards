@@ -37,7 +37,9 @@
                             return $item['employee_id'] == $employee['id'];
                         });
                         ?>
-                        <div class="content_row__name"><div class="name"><?= $name ?></div></div>
+                        <div class="content_row__name">
+                            <div class="name"><?= $name ?></div>
+                        </div>
                         <?php for ($i = 1; $i <= $days_count; $i++) { ?>
                             <?php
                             $index = array_search($i, array_map(function ($item): string {

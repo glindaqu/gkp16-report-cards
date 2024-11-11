@@ -21,7 +21,7 @@ class AttendanceController extends Controller
     public function index(): void
     {
         $this->view->index(
-            $this->user_model->get_user_by_id($_COOKIE['user_id']), 
+            $this->user_model->get_user_by_id($_COOKIE['user_id']),
             $this->user_model->get_user_role($_COOKIE['user_id'])
         );
     }
@@ -32,8 +32,7 @@ class AttendanceController extends Controller
         $outcome_time = $_POST['outcome'];
         $employee_id = $_POST['employee_id'];
         $date = date("Y-m-d");
-        if (isset($_POST['date'])) 
-        {
+        if (isset($_POST['date'])) {
             $date = $_POST['date'];
         }
         $income = DateTime::createFromFormat("Y-m-d H:i", "$date $income_time");
