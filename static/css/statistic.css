@@ -104,3 +104,38 @@
 .ip {
     font-size: 0.8em;
 }
+
+.employee_stat_container__item {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #c1c1c147;
+    padding: 1%;
+    border-radius: 12px;
+}
+
+.employee_stat_container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.margin-10 {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.employee_stat_container__item_date {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.employee_stat_container__item_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

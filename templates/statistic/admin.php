@@ -105,7 +105,6 @@
             let e = document.querySelector(".month_pick");
             let value = e.options[e.selectedIndex].value;
             window.location = "http://10.174.246.199/report/statistic/index/month=" + value;
-            console.log(value);
         });
     </script>
 </body>

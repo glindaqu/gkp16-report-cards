@@ -88,8 +88,8 @@ class Database
     public function get_attendance_by_user(int $user_id): array
     {
         $result = [];
-        $response = $this->db->query("SELECT * FROM attendance WHERE user_id = $user_id");
-        while ($item = $response->fetch_assoc()) 
+        $response = $this->db->query("SELECT * FROM attendance WHERE employee_id = $user_id");
+        while ($response && $item = $response->fetch_assoc()) 
         {
             $result[] = $item;
         }

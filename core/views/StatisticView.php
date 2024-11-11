@@ -13,7 +13,7 @@ class StatisticView extends View
         echo $content;
     }
 
-    public function user(): void 
+    public function user(array $attendance, array $months, int $current_month): void 
     {
         ob_start();
         require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/statistic/user.php";
