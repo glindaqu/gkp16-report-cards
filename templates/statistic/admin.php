@@ -62,9 +62,6 @@
                                         <div class="outcome"><?= $outcome_dt->format("H:i") ?></div>
                                     </div>
                                     <?= sprintf("%02d:%02d", $interval->h, $interval->i) ?>
-                                    <div class="ip">
-                                        <?= $attendance_by_employee[$index]['ip_address'] ?>
-                                    </div>
                                 <?php } ?>
                             </div>
                         <?php } ?>
