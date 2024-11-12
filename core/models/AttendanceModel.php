@@ -36,4 +36,9 @@ class AttendanceModel extends Model
     {
         $this->db->update_attendance_by_id($in, $out, $id);
     }
+
+    function get_attendance_by_user_and_date(int $user_id, string $date): array
+    {
+        return $this->db->get_attendance_by_user_date($user_id, $date);
+    }
 }

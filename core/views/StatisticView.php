@@ -6,6 +6,7 @@ class StatisticView extends View
 {
     public function admin(array $employes, array $attendance, array $months, int $current_month): void
     {
+        $role = "admin";
         ob_start();
         require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/statistic/admin.php";
         $content = ob_get_contents();

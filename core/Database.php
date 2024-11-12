@@ -84,6 +84,16 @@ class Database
         return $result;
     }
 
+    public function get_attendance_by_user_date(int $user_id, string $date): array 
+    {
+        $result = [];
+        $response = $this->db->query("SELECT * FROM attendance WHERE employee_id=$user_id AND income BETWEEN '$date 00:00:00' AND '$date 23:59:59' LIMIT 1");
+        while ($response && $item = $response->fetch_assoc()) {
+            $result[] = $item;
+        }
+        return $result;
+    }
+
     public function get_attendance_by_user(int $user_id, int $month): array
     {
         $days_count = cal_days_in_month(CAL_GREGORIAN, $month, date("Y"));

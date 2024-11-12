@@ -20,9 +20,13 @@ class AttendanceController extends Controller
 
     public function index(): void
     {
+        $attendance = $this->attendance_model->get_attendance_by_user_and_date($_COOKIE['user_id'], date("Y-m-d"));
+        $already_added = isset($attendance[0]['id']);
         $this->view->index(
             $this->user_model->get_user_by_id($_COOKIE['user_id']),
-            $this->user_model->get_user_role($_COOKIE['user_id'])
+            $this->user_model->get_user_role($_COOKIE['user_id']),
+            $already_added,
+            $attendance[0]
         );
     }
 
