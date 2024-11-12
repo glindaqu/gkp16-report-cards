@@ -28,6 +28,7 @@
             Время ухода
             <input type="time" name="outcome" id="outcome" value="<?= $outcome_dt->format("H:i") ?>" />
         </label>
+        <input type="text" name="date" style="display: none;" value="<?= $income_dt->format("Y-m-d") ?>">
         <input type="submit" value="Сохранить" />
     </form>
 

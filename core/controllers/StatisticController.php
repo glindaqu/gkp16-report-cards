@@ -73,8 +73,7 @@ class StatisticController extends Controller
         $income_time = $_POST['income'];
         $outcome_time = $_POST['outcome'];
         $attendance_id = $_POST['attendance_id'];
-
-        $date = date("Y-m-d");
+        $date = $_POST['date'];
 
         $income = DateTime::createFromFormat("Y-m-d H:i", "$date $income_time");
         $outcome = DateTime::createFromFormat("Y-m-d H:i", "$date $outcome_time");

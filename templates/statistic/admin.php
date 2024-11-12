@@ -46,7 +46,7 @@
                                 return DateTime::createFromFormat("Y-m-d H:i:s", $item['income'])->format("d");
                             }, $attendance_by_employee));
                             $div_id = '';
-                            if (isset(($attendance_by_employee[$index]['id']))) {
+                            if (is_numeric($index) && isset(($attendance_by_employee[$index]['id']))) {
                                 $div_id = $attendance_by_employee[$index]['id'];
                             }
                             ?>
