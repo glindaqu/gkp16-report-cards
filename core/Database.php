@@ -38,7 +38,7 @@ class Database
     public function get_users(): array
     {
         $result = [];
-        $response = $this->db->query("SELECT * FROM users");
+        $response = $this->db->query("SELECT * FROM users WHERE role != 'admin'");
         while ($response && $item = $response->fetch_assoc()) {
             $result[] = $item;
         }
