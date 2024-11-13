@@ -22,11 +22,11 @@
         </label>
         <label>
             Время прихода
-            <input type="time" name="income" id="income" value="<?= $income_dt->format("H:i") ?>" />
+            <input type="time" name="income" id="income" value="<?= $income_dt ? $income_dt->format("H:i") : '' ?>" />
         </label>
         <label>
             Время ухода
-            <input type="time" name="outcome" id="outcome" value="<?= $outcome_dt->format("H:i") ?>" />
+            <input type="time" name="outcome" id="outcome" value="<?= $outcome_dt ? $outcome_dt->format("H:i") : '' ?>" />
         </label>
         <input type="text" name="date" style="display: none;" value="<?= $income_dt->format("Y-m-d") ?>">
         <input type="submit" value="Сохранить" />

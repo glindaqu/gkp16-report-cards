@@ -12,7 +12,7 @@ class AttendanceModel extends Model
         $this->db = new Database();
     }
 
-    public function add_attendance(int $employee_id, DateTime $in, DateTime $out): void
+    public function add_attendance(int $employee_id, ?DateTime $in, ?DateTime $out): void
     {
         $this->db->insert_attendance($in, $out, $employee_id);
     }
@@ -32,7 +32,7 @@ class AttendanceModel extends Model
         return $this->db->get_attendance_by_id($row_id);
     }
 
-    function update(int $id, DateTime $in, DateTime $out): void
+    function update(int $id, ?DateTime $in, ?DateTime $out): void
     {
         $this->db->update_attendance_by_id($in, $out, $id);
     }

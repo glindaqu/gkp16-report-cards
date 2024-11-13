@@ -85,8 +85,10 @@
 
 .month_pick {
     width: 20%;
-    padding: 5px 10px;
+    padding: 10px 15px;
     margin: 2% 1%;
+    border: none;
+    border-radius: 7px;
 }
 
 .time_section {
@@ -94,11 +96,12 @@
     width: min-content;
     height: min-content;
     gap: 10px;
+    margin-bottom: 3px;
 }
 
 .outcome,
 .income {
-    font-size: 0.9em;
+    font-size: 0.8em;
 }
 
 .ip {
@@ -106,26 +109,27 @@
 }
 
 .employee_stat_container__item {
-    width: 100px;
-    height: 100px;
+    width: 108px;
+    height: 108px;
     display: flex;
+    padding: 7px;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     background-color: #c1c1c147;
-    padding: 1%;
-    border-radius: 12px;
+    border-radius: 7px;
+    cursor: pointer;
 }
 
 .employee_stat_container {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    max-width: 914px;   
 }
 
 .margin-10 {
-    margin-left: 10%;
-    margin-right: 10%;
+    margin: auto;
 }
 
 .employee_stat_container__item_date {

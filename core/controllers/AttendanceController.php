@@ -20,13 +20,9 @@ class AttendanceController extends Controller
 
     public function index(): void
     {
-        $attendance = $this->attendance_model->get_attendance_by_user_and_date($_COOKIE['user_id'], date("Y-m-d"));
-        $already_added = isset($attendance[0]['id']);
         $this->view->index(
             $this->user_model->get_user_by_id($_COOKIE['user_id']),
             $this->user_model->get_user_role($_COOKIE['user_id']),
-            $already_added,
-            $attendance[0]
         );
     }
 
@@ -41,7 +37,7 @@ class AttendanceController extends Controller
         }
         $income = DateTime::createFromFormat("Y-m-d H:i", "$date $income_time");
         $outcome = DateTime::createFromFormat("Y-m-d H:i", "$date $outcome_time");
-        $this->attendance_model->add_attendance($employee_id, $income, $outcome);
+        $this->attendance_model->add_attendance($employee_id, $income ? $income : NULL, $outcome ? $outcome : NULL);
         header("location: http://10.174.246.199/report/");
     }
 }

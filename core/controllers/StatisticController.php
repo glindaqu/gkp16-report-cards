@@ -65,7 +65,7 @@ class StatisticController extends Controller
         $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $row['income']);
         $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $row['outcome']);
 
-        $this->view->edit($name, $income_dt, $outcome_dt, $row);
+        $this->view->edit($name, $income_dt ?: null, $outcome_dt ?: null, $row);
     }
 
     function rewrite(): void
@@ -78,7 +78,7 @@ class StatisticController extends Controller
         $income = DateTime::createFromFormat("Y-m-d H:i", "$date $income_time");
         $outcome = DateTime::createFromFormat("Y-m-d H:i", "$date $outcome_time");
 
-        $this->attendance_model->update($attendance_id, $income, $outcome);
+        $this->attendance_model->update($attendance_id, $income ?: null, $outcome ?: null);
 
         header("location: http://10.174.246.199/report/");
     }

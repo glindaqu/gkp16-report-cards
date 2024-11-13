@@ -25,8 +25,12 @@
                 $index = array_search($i, array_map(function ($item): string {
                     return DateTime::createFromFormat("Y-m-d H:i:s", $item['income'])->format("d");
                 }, $attendance));
+                $attendance_id = '';
+                if (is_numeric($index)) {
+                    $attendance_id = $attendance[$index]['id'];
+                }
                 ?>
-                <div class="employee_stat_container__item">
+                <div class="employee_stat_container__item" id="<?= $attendance_id ?>">
                     <div class="employee_stat_container__item_date">
                         <?= $i ?>
                     </div>
@@ -35,13 +39,17 @@
                         if (is_numeric($index)) {
                             $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance[$index]['income']);
                             $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance[$index]['outcome']);
-                            $interval = $outcome_dt->diff($income_dt);
+                            
+                            $interval = NULL;
+                            if ($income_dt && $outcome_dt) {
+                                $interval = $outcome_dt->diff($income_dt);
+                            }
                             ?>
                             <div class="time_section">
-                                <div class="income"><?= $income_dt->format("H:i") ?> </div>
-                                <div class="outcome"><?= $outcome_dt->format("H:i") ?></div>
+                                <div class="income"><?= $income_dt ? $income_dt->format("H:i") : 'NULL' ?> </div>
+                                <div class="outcome"><?= $outcome_dt ? $outcome_dt->format("H:i") : 'NULL' ?></div>
                             </div>
-                            <?= sprintf("%02d:%02d", $interval->h, $interval->i) ?>
+                            <?= $interval ? sprintf("%02d:%02d", $interval->h, $interval->i) : 'NULL' ?>
                         <?php } ?>
                     </div>
                 </div>
@@ -56,6 +64,15 @@
             let e = document.querySelector(".month_pick");
             let value = e.options[e.selectedIndex].value;
             window.location = "http://10.174.246.199/report/statistic/index/month=" + value;
+        });
+        document.querySelectorAll(".employee_stat_container__item").forEach(item => {
+            item.addEventListener("click", element => {
+                if (item.id != "") {
+                    window.location = "http://10.174.246.199/report/statistic/edit/id=" + item.id;
+                } else {
+                    window.location = "http://10.174.246.199/report/attendance/";
+                }
+            });
         });
     </script>
 </body>

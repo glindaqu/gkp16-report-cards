@@ -23,7 +23,7 @@ class StatisticView extends View
         echo $content;
     }
 
-    public function edit(string $name, DateTime $income_dt, DateTime $outcome_dt, array $row): void
+    public function edit(string $name, ?DateTime $income_dt, ?DateTime $outcome_dt, array $row): void
     {
         ob_start();
         require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/statistic/edit.php";
