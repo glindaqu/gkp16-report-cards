@@ -23,6 +23,7 @@
         </div>
         <div class="employee_stat_container margin-10">
             <?php
+            $today = date("d");
             for ($i = 1; $i <= $days_count; $i++) {
                 $index = array_search($i, array_map(function ($item): string {
                     return DateTime::createFromFormat("Y-m-d H:i:s", $item['income'])->format("d");
@@ -32,7 +33,7 @@
                     $attendance_id = $attendance[$index]['id'];
                 }
                 ?>
-                <div class="employee_stat_container__item" id="<?= $attendance_id ?>">
+                <div class="employee_stat_container__item <?= $today == $i ? 'today' : '' ?>" id="<?= $attendance_id ?>">
                     <div class="employee_stat_container__item_date">
                         <?= $i ?>
                     </div>

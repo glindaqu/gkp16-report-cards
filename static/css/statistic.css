@@ -1,5 +1,6 @@
 .container {
     width: 100%;
+    height: 100%;
 }
 
 .content {
@@ -7,6 +8,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 1%;
+    height: 100%;
 }
 
 .content_header {
@@ -19,6 +21,7 @@
 
 .table_body {
     overflow: scroll;
+    max-height: 75%;
 }
 
 .content_row {
@@ -133,8 +136,12 @@
     max-width: 914px;   
 }
 
+.today {
+    background-color: #3635352a;
+}
+
 .margin-10 {
-    margin: auto;
+    margin: 0 auto;
 }
 
 .employee_stat_container__item_date {
