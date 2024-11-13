@@ -14,11 +14,13 @@
     <?php $days_count = cal_days_in_month(CAL_GREGORIAN, $current_month, date("Y")); ?>
 
     <div class="content">
-        <select class="month_pick">
-            <?php foreach ($months as $id => $month) { ?>
-                <option value="<?= $id ?>" <?= $id == $current_month ? 'selected' : '' ?>><?= $month ?></option>
-            <?php } ?>
-        </select>
+        <div class="month_pick_wrapper">
+            <select class="month_pick">
+                <?php foreach ($months as $id => $month) { ?>
+                    <option value="<?= $id ?>" <?= $id == $current_month ? 'selected' : '' ?>><?= $month ?></option>
+                <?php } ?>
+            </select>
+        </div>
         <div class="employee_stat_container margin-10">
             <?php
             for ($i = 1; $i <= $days_count; $i++) {
@@ -39,7 +41,7 @@
                         if (is_numeric($index)) {
                             $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance[$index]['income']);
                             $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance[$index]['outcome']);
-                            
+
                             $interval = NULL;
                             if ($income_dt && $outcome_dt) {
                                 $interval = $outcome_dt->diff($income_dt);

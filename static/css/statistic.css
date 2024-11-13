@@ -83,6 +83,11 @@
     display: none !important;
 }
 
+.month_pick_wrapper {
+    margin: 0.5% auto;
+    width: 930px;   
+}
+
 .month_pick {
     width: 20%;
     padding: 10px 15px;
@@ -116,7 +121,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: #c1c1c147;
+    background-color: #c1c1c129;
     border-radius: 7px;
     cursor: pointer;
 }
