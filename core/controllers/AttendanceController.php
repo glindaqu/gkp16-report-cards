@@ -18,15 +18,16 @@ class AttendanceController extends Controller
         $this->user_model = new UserModel();
     }
 
-    public function index(): void
+    public function index(array $params): void
     {
         $this->view->index(
             $this->user_model->get_user_by_id($_COOKIE['user_id']),
             $this->user_model->get_user_role($_COOKIE['user_id']),
+            isset($params['date']) ? $params['date'] : date('Y-m-d') 
         );
     }
 
-    public function add(): void
+    public function add(array $params): void
     {
         $income_time = $_POST['income'];
         $outcome_time = $_POST['outcome'];
@@ -34,10 +35,16 @@ class AttendanceController extends Controller
         $date = date("Y-m-d");
         if (isset($_POST['date'])) {
             $date = $_POST['date'];
+        } else if (isset($params['date'])) {
+            $date = $params['date'];
         }
         $income = DateTime::createFromFormat("Y-m-d H:i", "$date $income_time");
         $outcome = DateTime::createFromFormat("Y-m-d H:i", "$date $outcome_time");
-        $this->attendance_model->add_attendance($employee_id, $income ? $income : NULL, $outcome ? $outcome : NULL);
+        $this->attendance_model->add_attendance(
+            $employee_id, 
+            $income ? $income : NULL, 
+            $outcome ? $outcome : NULL
+        );
         header("location: http://10.174.246.199/report/");
     }
 }

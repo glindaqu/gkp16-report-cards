@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/View.php";
 
 class AttendanceView extends View
 {
-    public function index(array $employee, string $role): void
+    public function index(array $employee, string $role, string $date): void
     {
         ob_start();
         require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/attendance/index.php";
