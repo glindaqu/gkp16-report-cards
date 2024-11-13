@@ -55,13 +55,16 @@
                                 if (is_numeric($index)) {
                                     $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['income']);
                                     $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['outcome']);
-                                    $interval = $outcome_dt->diff($income_dt);
+                                    $interval = NULL;
+                                    if ($income_dt && $outcome_dt) {
+                                        $interval = $outcome_dt->diff($income_dt);
+                                    }
                                     ?>
                                     <div class="time_section">
-                                        <div class="income"><?= $income_dt->format("H:i") ?> </div>
-                                        <div class="outcome"><?= $outcome_dt->format("H:i") ?></div>
+                                        <div class="income"><?= $income_dt ? $income_dt->format("H:i") : "NULL" ?> </div>
+                                        <div class="outcome"><?= $outcome_dt ? $outcome_dt->format("H:i") : "NULL" ?></div>
                                     </div>
-                                    <?= sprintf("%02d:%02d", $interval->h, $interval->i) ?>
+                                    <?= $interval ? sprintf("%02d:%02d", $interval->h, $interval->i) : "NULL" ?>
                                 <?php } ?>
                             </div>
                         <?php } ?>
