@@ -14,7 +14,7 @@ class Logger
             Logger::$file_path,
             "[$date] $message
                                 User_Id={$_COOKIE['user_id']}
-                                IP={$_SERVER['REMOTE_ADDR']}\n",
+                                IP={$_SERVER['REMOTE_ADDR']}\n\n",
             FILE_APPEND
         );
     }

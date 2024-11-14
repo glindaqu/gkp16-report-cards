@@ -81,8 +81,16 @@ class StatisticController extends Controller
         $outcome = DateTime::createFromFormat("Y-m-d H:i", "$date $outcome_time");
 
         $old_row = $this->attendance_model->get_attendances_by_id($attendance_id);
-        $old_income = DateTime::createFromFormat("Y-m-d H:i:s", $old_row['income'])->format('H:i');
-        $old_outcome = DateTime::createFromFormat("Y-m-d H:i:s", $old_row['outcome'])->format('H:i');
+        $old_income = DateTime::createFromFormat("Y-m-d H:i:s", $old_row['income']);
+        $old_outcome = DateTime::createFromFormat("Y-m-d H:i:s", $old_row['outcome']);
+        $old_outcome_str = NULL;
+        $old_income_str = NULL;
+        if ($old_outcome) {
+            $old_outcome_str = DateTime::createFromFormat("Y-m-d H:i:s", $old_row['outcome'])->format('H:i');
+        }
+        if ($old_income) {
+            $old_income_str = DateTime::createFromFormat("Y-m-d H:i:s", $old_row['income'])->format('H:i');
+        }
         $old_date = DateTime::createFromFormat("Y-m-d H:i:s", $old_row['income'])->format('Y-m-d');
         $old_launch = $old_row['launch'];
 
@@ -94,8 +102,8 @@ class StatisticController extends Controller
         );
         Logger::Log(
             "(edit) Посещаемость обновлена. 
-                                Income: old=$old_income, new=$income_time
-                                Outcome: old=$old_outcome, new=$outcome_time 
+                                Income: old=$old_income_str, new=$income_time
+                                Outcome: old=$old_outcome_str, new=$outcome_time 
                                 Date: old=$old_date, new=$date
                                 Launch: old=$old_launch, new=$launch"
         );
