@@ -43,6 +43,9 @@ class AuthorizeController extends Controller
             time() + 3600 * 3,
             "/"
         );
+        Logger::Log(
+            "(auth) Пользователь $login авторизован"
+        );
         header("location: http://10.174.246.199/report/");
     }
 

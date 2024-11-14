@@ -23,7 +23,7 @@ class AttendanceController extends Controller
         $this->view->index(
             $this->user_model->get_user_by_id($_COOKIE['user_id']),
             $this->user_model->get_user_role($_COOKIE['user_id']),
-            isset($params['date']) ? $params['date'] : date('Y-m-d') 
+            isset($params['date']) ? $params['date'] : date('Y-m-d')
         );
     }
 
@@ -42,10 +42,17 @@ class AttendanceController extends Controller
         $income = DateTime::createFromFormat("Y-m-d H:i", "$date $income_time");
         $outcome = DateTime::createFromFormat("Y-m-d H:i", "$date $outcome_time");
         $this->attendance_model->add_attendance(
-            $employee_id, 
-            $income ? $income : NULL, 
+            $employee_id,
+            $income ? $income : NULL,
             $outcome ? $outcome : NULL,
             $launch
+        );
+        Logger::Log(
+            "(add) Посещаемость добавлена. 
+                                Income: $income_time
+                                Outcome: $outcome_time 
+                                Date: $date
+                                Launch: $launch"
         );
         header("location: http://10.174.246.199/report/");
     }
