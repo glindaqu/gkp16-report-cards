@@ -73,12 +73,18 @@ class StatisticController extends Controller
         $income_time = $_POST['income'];
         $outcome_time = $_POST['outcome'];
         $attendance_id = $_POST['attendance_id'];
+        $launch = $_POST['launch'];
         $date = $_POST['date'];
 
         $income = DateTime::createFromFormat("Y-m-d H:i", "$date $income_time");
         $outcome = DateTime::createFromFormat("Y-m-d H:i", "$date $outcome_time");
 
-        $this->attendance_model->update($attendance_id, $income ?: null, $outcome ?: null);
+        $this->attendance_model->update(
+            $attendance_id, 
+            $income ?: null, 
+            $outcome ?: null,
+            $launch
+        );
 
         header("location: http://10.174.246.199/report/");
     }

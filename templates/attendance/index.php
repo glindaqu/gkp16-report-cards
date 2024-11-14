@@ -22,6 +22,10 @@
             </select>
         </label>
         <label>
+            Длительность обеда (мин.)
+            <input type="number" name="launch" id="launch" value="30" />
+        </label>
+        <label>
             Время прихода
             <input type="time" name="income" id="income" />
         </label>

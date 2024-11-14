@@ -33,6 +33,7 @@ class AttendanceController extends Controller
         $outcome_time = $_POST['outcome'];
         $employee_id = $_POST['employee_id'];
         $date = date("Y-m-d");
+        $launch = $_POST['launch'];
         if (isset($_POST['date'])) {
             $date = $_POST['date'];
         } else if (isset($params['date'])) {
@@ -43,7 +44,8 @@ class AttendanceController extends Controller
         $this->attendance_model->add_attendance(
             $employee_id, 
             $income ? $income : NULL, 
-            $outcome ? $outcome : NULL
+            $outcome ? $outcome : NULL,
+            $launch
         );
         header("location: http://10.174.246.199/report/");
     }

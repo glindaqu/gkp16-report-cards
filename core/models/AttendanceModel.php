@@ -12,9 +12,9 @@ class AttendanceModel extends Model
         $this->db = new Database();
     }
 
-    public function add_attendance(int $employee_id, ?DateTime $in, ?DateTime $out): void
+    public function add_attendance(int $employee_id, ?DateTime $in, ?DateTime $out, int $launch): void
     {
-        $this->db->insert_attendance($in, $out, $employee_id);
+        $this->db->insert_attendance($in, $out, $employee_id, $launch);
     }
 
     public function get_attendances(int $month): array
@@ -32,9 +32,9 @@ class AttendanceModel extends Model
         return $this->db->get_attendance_by_id($row_id);
     }
 
-    function update(int $id, ?DateTime $in, ?DateTime $out): void
+    function update(int $id, ?DateTime $in, ?DateTime $out, int $launch): void
     {
-        $this->db->update_attendance_by_id($in, $out, $id);
+        $this->db->update_attendance_by_id($in, $out, $id, $launch);
     }
 
     function get_attendance_by_user_and_date(int $user_id, string $date): array

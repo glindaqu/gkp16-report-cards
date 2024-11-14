@@ -21,6 +21,10 @@
             </select>
         </label>
         <label>
+            Длительность обеда (мин.)
+            <input type="number" name="launch" id="launch" value="<?= $row['launch'] ?>" />
+        </label>
+        <label>
             Время прихода
             <input type="time" name="income" id="income" value="<?= $income_dt ? $income_dt->format("H:i") : '' ?>" />
         </label>
