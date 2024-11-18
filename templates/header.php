@@ -8,4 +8,5 @@
         <?php } ?>
         <a href="/report/statistic/index" class="header_options__item hover-underline-animation">Статистика</a>
     </div> -->
+    <a href="/report/authorize/logout" class="header_options__item hover-underline-animation">Выйти</a>
 </header>

@@ -49,6 +49,12 @@ class AuthorizeController extends Controller
         header("location: http://10.174.246.199/report/");
     }
 
+    public function logout(): void {
+        unset($_COOKIE['user_id']);
+        setcookie('user_id', '', -1, '/'); 
+        header("location: http://10.174.246.199/report/");
+    }
+
     public static function has_auth(): int
     {
         if (isset($_COOKIE['user_id'])) {
