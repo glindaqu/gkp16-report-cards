@@ -79,28 +79,10 @@
     <script>
         const menu = document.querySelector(".menu");
 
-        let lastClickedId = 0;
-
-        document.addEventListener('contextmenu', e => {
-            console.log(e.target);
-            if (e.target.className != 'content_row__date' || e.target.id == '') {
-                menu.classList.add("hidden");
-                return;
-            }
-            drawContextMenu({ x: e.clientX, y: e.clientY });
-            lastClickedId = e.target.id;
-            e.preventDefault();
-        });
-
-        document.addEventListener('click', () => { menu.classList.add("hidden"); })
-
-        const drawContextMenu = pos => {
-            menu.classList.remove("hidden");
-            menu.setAttribute("style", `top: ${pos.y}px; left: ${pos.x}px;`);
-        };
-
-        document.querySelector(".item").addEventListener("click", () => {
-            window.location.replace(`http://10.174.246.199/report/statistic/edit/id=${lastClickedId}`)
+        document.querySelectorAll('.content_row__date').forEach(el => {
+            el.addEventListener('click', () => {
+                window.location.replace(`http://10.174.246.199/report/statistic/edit/id=${el.id}`);
+            });
         });
 
         document.querySelector(".month_pick").addEventListener("change", () => {
