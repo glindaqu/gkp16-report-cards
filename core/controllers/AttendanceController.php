@@ -33,7 +33,6 @@ class AttendanceController extends Controller
         $outcome_time = $_POST['outcome'];
         $employee_id = $_POST['employee_id'];
         $date = date("Y-m-d");
-        $launch = $_POST['launch'];
         if (isset($_POST['date'])) {
             $date = $_POST['date'];
         } else if (isset($params['date'])) {
@@ -45,14 +44,12 @@ class AttendanceController extends Controller
             $employee_id,
             $income ? $income : NULL,
             $outcome ? $outcome : NULL,
-            $launch
         );
         Logger::Log(
             "(add) Посещаемость добавлена. 
                                 Income: $income_time
                                 Outcome: $outcome_time 
-                                Date: $date
-                                Launch: $launch"
+                                Date: $date"
         );
         header("location: http://10.174.246.199/report/");
     }

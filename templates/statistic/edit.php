@@ -12,7 +12,7 @@
 
     <?php require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/header.php"; ?>
 
-    <form action="/report/statistic/rewrite" method="post">
+    <form action="/report/statistic/rewrite" method="post" enctype="multipart/form-data">
         <input name="attendance_id" value="<?= $row['id'] ?>" style="display: none" />
         <label>
             Имя сотрудника
@@ -21,16 +21,18 @@
             </select>
         </label>
         <label>
-            Длительность обеда (мин.)
-            <input type="number" name="launch" id="launch" value="<?= $row['launch'] ?>" />
-        </label>
-        <label>
             Время прихода
             <input type="time" name="income" id="income" value="<?= $income_dt ? $income_dt->format("H:i") : '' ?>" />
+            <?php if ($role == 'admin') { ?>
+                <input type="file" name="income_proof">
+            <?php } ?>
         </label>
         <label>
             Время ухода
             <input type="time" name="outcome" id="outcome" value="<?= $outcome_dt ? $outcome_dt->format("H:i") : '' ?>" />
+            <?php if ($role == 'admin') { ?>
+                <input type="file" name="outcome_proof">
+            <?php } ?>
         </label>
         <input type="text" name="date" style="display: none;" value="<?= $income_dt->format("Y-m-d") ?>">
         <input type="submit" value="Сохранить" />

@@ -63,7 +63,7 @@ class Database
     #endregion users
 
     #region attendance
-    public function insert_attendance(?DateTime $income, ?DateTime $outcome, int $employee_id, int $launch): void
+    public function insert_attendance(?DateTime $income, ?DateTime $outcome, int $employee_id): void
     {
         $ip = $_SERVER['REMOTE_ADDR'];
 
@@ -79,16 +79,16 @@ class Database
 
         if ($income_str == NULL && $outcome_str == NULL) {
             $this->db->query("INSERT INTO attendance(income, outcome, employee_id, ip_address, launch) VALUES 
-            (null, null, $employee_id, '$ip', $launch)");
+            (null, null, $employee_id, '$ip')");
         } else if ($outcome_str == NULL) {
             $this->db->query("INSERT INTO attendance(income, outcome, employee_id, ip_address, launch) VALUES 
-            ('$income_str', null, $employee_id, '$ip', $launch)");
+            ('$income_str', null, $employee_id, '$ip')");
         } else if ($income_str == NULL) {
             $this->db->query("INSERT INTO attendance(income, outcome, employee_id, ip_address, launch) VALUES 
-            (null, '$outcome_str', $employee_id, '$ip', $launch)");
+            (null, '$outcome_str', $employee_id, '$ip')");
         } else {
             $this->db->query("INSERT INTO attendance(income, outcome, employee_id, ip_address, launch) VALUES 
-            ('$income_str', '$outcome_str', $employee_id, '$ip', $launch)");
+            ('$income_str', '$outcome_str', $employee_id, '$ip')");
         }
     }
 
@@ -132,18 +132,18 @@ class Database
         return $response->fetch_assoc();
     }
 
-    public function update_attendance_by_id(?DateTime $income, ?DateTime $outcome, int $attendance_id, int $launch): void
+    public function update_attendance_by_id(?DateTime $income, ?DateTime $outcome, int $attendance_id): void
     {
         $outcome_str = $outcome ? $outcome->format('Y-m-d H:i:s') : NULL;
         $income_str = $income ? $income->format('Y-m-d H:i:s') : NULL;
         if ($income_str == NULL && $outcome_str == NULL) {
-            $this->db->query("UPDATE attendance SET launch=$launch, income=NULL, outcome=NULL WHERE id=$attendance_id");
+            $this->db->query("UPDATE attendance SET income=NULL, outcome=NULL WHERE id=$attendance_id");
         } else if ($income_str == NULL) {
-            $this->db->query("UPDATE attendance SET launch=$launch, income=NULL, outcome='$outcome_str' WHERE id=$attendance_id");
+            $this->db->query("UPDATE attendance SET income=NULL, outcome='$outcome_str' WHERE id=$attendance_id");
         } else if ($outcome_str == NULL) {
-            $this->db->query("UPDATE attendance SET launch=$launch, income='$income_str', outcome=NULL WHERE id=$attendance_id");
+            $this->db->query("UPDATE attendance SET income='$income_str', outcome=NULL WHERE id=$attendance_id");
         } else {
-            $this->db->query("UPDATE attendance SET launch=$launch, income='$income_str', outcome='$outcome_str' WHERE id=$attendance_id");
+            $this->db->query("UPDATE attendance SET income='$income_str', outcome='$outcome_str' WHERE id=$attendance_id");
         }
     }
     #endregion attendance

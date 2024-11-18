@@ -11,7 +11,7 @@
 <body>
     <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/report/templates/header.php"); ?>
 
-    <?php $days_count = cal_days_in_month(CAL_GREGORIAN, $current_month, date("Y")); ?>
+    <?php $days_count = cal_days_in_month(CAL_GREGORIAN, $current_month, date("Y"));?>
 
     <div class="content">
         <div class="month_pick_wrapper">
@@ -43,9 +43,9 @@
                         if (is_numeric($index)) {
                             $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance[$index]['income']);
                             $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance[$index]['outcome']);
-
                             $interval = NULL;
                             if ($income_dt && $outcome_dt) {
+                                // $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d H:i:s", strtotime($income) + 60 * $employee['launch']));
                                 $interval = $outcome_dt->diff($income_dt);
                             }
                             ?>

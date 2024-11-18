@@ -39,19 +39,20 @@ class StatisticController extends Controller
         if (isset($params['month'])) {
             $month = $params['month'];
         }
-        $role = $this->user_model->get_user_role($_COOKIE['user_id']);
-        if ($role == "admin") {
+        $employee = $this->user_model->get_user_by_id($_COOKIE['user_id']);
+        if ($employee['role'] == "admin") {
             $this->view->admin(
                 $this->user_model->get_users(),
                 $this->attendance_model->get_attendances($month),
                 $months,
                 $month
             );
-        } else if ($role == "employee") {
+        } else if ($employee['role'] == "employee") {
             $this->view->user(
                 $this->attendance_model->get_attendances_by_user($_COOKIE['user_id'], $month),
                 $months,
-                $month
+                $month,
+                $employee
             );
         }
     }
@@ -66,7 +67,13 @@ class StatisticController extends Controller
         $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $row['income']);
         $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $row['outcome']);
 
-        $this->view->edit($name, $income_dt ?: null, $outcome_dt ?: null, $row);
+        $this->view->edit(
+            $name, 
+            $income_dt ?: null, 
+            $outcome_dt ?: null, 
+            $row, 
+            $this->user_model->get_user_role($_COOKIE['user_id'])
+        );
     }
 
     function rewrite(): void
@@ -74,7 +81,6 @@ class StatisticController extends Controller
         $income_time = $_POST['income'];
         $outcome_time = $_POST['outcome'];
         $attendance_id = $_POST['attendance_id'];
-        $launch = $_POST['launch'];
         $date = $_POST['date'];
 
         $income = DateTime::createFromFormat("Y-m-d H:i", "$date $income_time");
@@ -92,20 +98,19 @@ class StatisticController extends Controller
             $old_income_str = DateTime::createFromFormat("Y-m-d H:i:s", $old_row['income'])->format('H:i');
         }
         $old_date = DateTime::createFromFormat("Y-m-d H:i:s", $old_row['income'])->format('Y-m-d');
-        $old_launch = $old_row['launch'];
+
+        // move_uploaded_file($_FILES["income_proof"]["tmp_name"], $_FILES["income_proof"]["name"]);
 
         $this->attendance_model->update(
             $attendance_id,
             $income ?: null,
-            $outcome ?: null,
-            $launch
+            $outcome ?: null
         );
         Logger::Log(
             "(edit) Посещаемость обновлена. 
                                 Income: old=$old_income_str, new=$income_time
                                 Outcome: old=$old_outcome_str, new=$outcome_time 
-                                Date: old=$old_date, new=$date
-                                Launch: old=$old_launch, new=$launch"
+                                Date: old=$old_date, new=$date"
         );
         header("location: http://10.174.246.199/report/");
     }
