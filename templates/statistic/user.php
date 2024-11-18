@@ -11,7 +11,7 @@
 <body>
     <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/report/templates/header.php"); ?>
 
-    <?php $days_count = cal_days_in_month(CAL_GREGORIAN, $current_month, date("Y"));?>
+    <?php $days_count = cal_days_in_month(CAL_GREGORIAN, $current_month, date("Y")); ?>
 
     <div class="content">
         <div class="month_pick_wrapper">
@@ -34,7 +34,8 @@
                     $attendance_id = $attendance[$index]['id'];
                 }
                 ?>
-                <div class="employee_stat_container__item <?= $today == $i && $month == $current_month ? 'today' : '' ?>" id="<?= $attendance_id ?>">
+                <div class="employee_stat_container__item <?= $today == $i && $month == $current_month ? 'today' : '' ?>"
+                    id="<?= $attendance_id ?>">
                     <div class="employee_stat_container__item_date">
                         <?= $i ?>
                     </div>
@@ -44,9 +45,11 @@
                             $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance[$index]['income']);
                             $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance[$index]['outcome']);
                             $interval = NULL;
+                            $time = strtotime($attendance[$index]['income']);
+                            $time = $time + ($employee['launch'] * 60);
+                            $date = DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d H:i:s", $time));
                             if ($income_dt && $outcome_dt) {
-                                // $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d H:i:s", strtotime($income) + 60 * $employee['launch']));
-                                $interval = $outcome_dt->diff($income_dt);
+                                $interval = $outcome_dt->diff($date);
                             }
                             ?>
                             <div class="time_section">
