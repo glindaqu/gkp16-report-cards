@@ -43,15 +43,21 @@ class AuthorizeController extends Controller
             time() + 3600 * 3,
             "/"
         );
-        Logger::Log(
-            "(auth) Пользователь $login авторизован"
+        setcookie(
+            'user_name',
+            $user['lastname'] . ' ' . $user['name'] . ' ' . $user['patronymic'],
+            time() + 3600 * 3,
+            "/"
         );
+        Logger::Log("(auth) Пользователь $login авторизован");
         header("location: http://10.174.246.199/report/");
     }
 
     public function logout(): void {
         unset($_COOKIE['user_id']);
+        unset($_COOKIE['user_name']);
         setcookie('user_id', '', -1, '/'); 
+        setcookie('user_name', '', -1, '/'); 
         header("location: http://10.174.246.199/report/");
     }
 
