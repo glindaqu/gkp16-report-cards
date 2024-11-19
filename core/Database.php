@@ -146,5 +146,15 @@ class Database
             $this->db->query("UPDATE attendance SET income='$income_str', outcome='$outcome_str' WHERE id=$attendance_id");
         }
     }
+
+    public function add_income_proof(int $id, string $path): void
+    {
+        $this->db->query("UPDATE attendance SET income_proof='$path' WHERE id=$id");
+    }
+
+    public function add_outcome_proof(int $id, string $path): void
+    {
+        $this->db->query("UPDATE attendance SET outcome_proof='$path' WHERE id=$id");
+    }
     #endregion attendance
 }

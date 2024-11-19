@@ -25,13 +25,20 @@
             <input type="time" name="income" id="income" value="<?= $income_dt ? $income_dt->format("H:i") : '' ?>" />
             <?php if ($role == 'admin') { ?>
                 <input type="file" name="income_proof">
+                <?php if ($row['income_proof'] != '') { ?>
+                    <a href="http://10.174.246.199/report/statistic/image/name=<?= $row['income_proof'] ?>">Сохраненное фото</a>
+                <?php } ?>
             <?php } ?>
         </label>
         <label>
             Время ухода
-            <input type="time" name="outcome" id="outcome" value="<?= $outcome_dt ? $outcome_dt->format("H:i") : '' ?>" />
+            <input type="time" name="outcome" id="outcome"
+                value="<?= $outcome_dt ? $outcome_dt->format("H:i") : '' ?>" />
             <?php if ($role == 'admin') { ?>
                 <input type="file" name="outcome_proof">
+                <?php if ($row['outcome_proof'] != '') { ?>
+                    <a href="http://10.174.246.199/report/statistic/image/name=<?= $row['outcome_proof'] ?>">Сохраненное фото</a>
+                <?php } ?>
             <?php } ?>
         </label>
         <input type="text" name="date" style="display: none;" value="<?= $income_dt->format("Y-m-d") ?>">

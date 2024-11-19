@@ -31,4 +31,12 @@ class StatisticView extends View
         ob_end_clean();
         echo $content;
     }
+
+    public function image(string $name): void {
+        ob_start();
+        require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/statistic/image.php";
+        $content = ob_get_contents();
+        ob_end_clean();
+        echo $content;
+    }
 }

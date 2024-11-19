@@ -41,4 +41,13 @@ class AttendanceModel extends Model
     {
         return $this->db->get_attendance_by_user_date($user_id, $date);
     }
+
+    function add_attendance_proof(string $type, string $path, int $attendance_id): void
+    {
+        if ($type == 'income') {
+            $this->db->add_income_proof($attendance_id, $path);
+        } else if ($type == 'outcome') {
+            $this->db->add_outcome_proof($attendance_id, $path);
+        }
+    }
 }
