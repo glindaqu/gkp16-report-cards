@@ -19,7 +19,7 @@
     background-color: rgb(237, 237, 237);
 }
 
-.table_body {
+.table {
     overflow: scroll;
     max-height: 75%;
 }
@@ -40,17 +40,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.content_row__date {
-    width: 120px;
-    text-align: center;
-    align-items: center;
-    height: 70px;
-    border: 0.1px solid rgba(0, 0, 0, 0.097);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
 }
 
 .menu {
@@ -88,7 +77,7 @@
 
 .month_pick_wrapper {
     margin: 0.5% auto;
-    width: 930px;   
+    width: 930px;
 }
 
 .month_pick {
@@ -133,7 +122,7 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    max-width: 914px;   
+    max-width: 914px;
 }
 
 .today {
@@ -154,4 +143,85 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.table_wrapper {
+    border: 1px solid #ccc;
+    background: #eee;
+    width: 98%;
+    height: fit-content;
+    max-height: 75%;
+    overflow: auto;
+    position: relative;
+    margin: 0 auto;
+}
+
+table {
+    border-spacing: 0;
+    white-space: nowrap;
+    table-layout: fixed;
+}
+
+thead,
+tr>th {
+    position: sticky;
+    background: #eee;
+}
+
+thead {
+    top: 0;
+    z-index: 2;
+}
+
+tr>th {
+    left: 0;
+    z-index: 1;
+}
+
+thead tr>th:first-child {
+    z-index: 3;
+}
+
+.name {
+    min-width: 300px;
+    max-width: 300px;
+    text-wrap: wrap;
+}
+
+th,
+td {
+    height: 50px;
+    min-width: 85px;
+    max-width: 85px;
+    border: 1px solid #ccc;
+    border-width: 0 0 1px 1px;
+    text-align: left;
+    padding: 10px;
+    font-family: sans-serif;
+}
+
+.center {
+    text-align: center;
+}
+
+td {
+    background: #fff;
+}
+
+th:first-child {
+    border-right-width: 1px;
+    border-left: 0;
+}
+
+th+td,
+th:first-child+th {
+    border-left: 0;
+}
+
+tbody tr:last-child>* {
+    border-bottom: 0;
+}
+
+tr>*:last-child {
+    border-right: 0;
 }

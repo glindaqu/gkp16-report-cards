@@ -11,67 +11,79 @@
 <body>
 
     <?php require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/header.php"; ?>
+    <?php require $_SERVER['DOCUMENT_ROOT'] . "/report/core/utils/Translate.php"; ?>
     <?php $days_count = cal_days_in_month(CAL_GREGORIAN, $current_month, date("Y")); ?>
 
     <div class="container">
-        <div class="menu hidden">
-            <div class="item">Редактировать</div>
-        </div>
         <div class="content">
             <select class="month_pick">
                 <?php foreach ($months as $id => $month) { ?>
                     <option value="<?= $id ?>" <?= $id == $current_month ? 'selected' : '' ?>><?= $month ?></option>
                 <?php } ?>
             </select>
-            <div class="table_body">
-                <div class="content_header">
-                    <?php for ($i = 1; $i <= $days_count; $i++) { ?>
-                        <div class="content_row__date"><?= $i ?></div>
-                    <?php } ?>
-                </div>
-                <?php foreach ($employes as $employee) { ?>
-                    <div class="content_row">
-                        <?php
-                        $name = $employee['lastname'] . " " . $employee['name'] . " " . $employee['patronymic'];
-                        $attendance_by_employee = array_filter($attendance, function ($item) use ($employee): bool {
-                            return $item['employee_id'] == $employee['id'];
-                        });
-                        ?>
-                        <div class="content_row__name">
-                            <div class="name"><?= $name ?></div>
-                        </div>
-                        <?php for ($i = 1; $i <= $days_count; $i++) { ?>
-                            <?php
-                            $index = array_search($i, array_map(function ($item): string {
-                                return DateTime::createFromFormat("Y-m-d H:i:s", $item['income'])->format("d");
-                            }, $attendance_by_employee));
-                            $div_id = '';
-                            if (is_numeric($index) && isset(($attendance_by_employee[$index]['id']))) {
-                                $div_id = $attendance_by_employee[$index]['id'];
-                            }
-                            ?>
-                            <div class="content_row__date" id="<?= $div_id ?>">
+
+            <div class="table_wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <?php for ($i = 1; $i <= $days_count; $i++) { ?>
+                                <th class="center">
+                                    <?= 
+                                    $i . ', ' . TranslateUtils::translate_weekday(DateTime::createFromFormat(
+                                        "Y-m-d", 
+                                        "2024-$current_month-$i"
+                                    )->format("D"))
+                                    ?>
+                                </th>
+                            <?php } ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($employes as $employee) { ?>
+                            <tr>
                                 <?php
-                                if (is_numeric($index)) {
-                                    $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['income']);
-                                    $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['outcome']);
-                                    $interval = NULL;
-                                    if ($income_dt && $outcome_dt) {
-                                        $interval = $outcome_dt->diff($income_dt);
+                                $name = $employee['lastname'] . " " . $employee['name'] . " " . $employee['patronymic'];
+                                $attendance_by_employee = array_filter($attendance, function ($item) use ($employee): bool {
+                                    return $item['employee_id'] == $employee['id'];
+                                });
+                                ?>
+                                <th class="name"><?= $name ?></th>
+                                <?php for ($i = 1; $i <= $days_count; $i++) { ?>
+                                    <?php
+                                    $index = array_search($i, array_map(function ($item): string {
+                                        return DateTime::createFromFormat("Y-m-d H:i:s", $item['income'])->format("d");
+                                    }, $attendance_by_employee));
+                                    $div_id = '';
+                                    if (is_numeric($index) && isset(($attendance_by_employee[$index]['id']))) {
+                                        $div_id = $attendance_by_employee[$index]['id'];
                                     }
                                     ?>
-                                    <div class="time_section">
-                                        <div class="income"><?= $income_dt ? $income_dt->format("H:i") : "NULL" ?> </div>
-                                        <div class="outcome"><?= $outcome_dt ? $outcome_dt->format("H:i") : "NULL" ?></div>
-                                    </div>
-                                    <?= $interval ? sprintf("%02d:%02d", $interval->h, $interval->i) : "NULL" ?>
+                                    <td class="content_row__date" id="<?= $div_id ?>">
+                                        <?php
+                                        if (is_numeric($index)) {
+                                            $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['income']);
+                                            $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['outcome']);
+                                            $interval = NULL;
+                                            if ($income_dt && $outcome_dt) {
+                                                $interval = $outcome_dt->diff($income_dt);
+                                            }
+                                            ?>
+                                            <div class="time_section">
+                                                <div class="income"><?= $income_dt ? $income_dt->format("H:i") : "NULL" ?> </div>
+                                                <div class="outcome"><?= $outcome_dt ? $outcome_dt->format("H:i") : "NULL" ?></div>
+                                            </div>
+                                            <?= $interval ? sprintf("%02d:%02d", $interval->h, $interval->i) : "NULL" ?>
+                                        <?php } ?>
+                                    </td>
                                 <?php } ?>
-                            </div>
+                            </tr>
                         <?php } ?>
-                    </div>
-                <?php } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
     </div>
 
     <?php require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/footer.php"; ?>
