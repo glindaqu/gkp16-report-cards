@@ -25,6 +25,7 @@ body {
 
 a {
     text-decoration: none;
+    color: black;
 }
 
 .header_logo {
@@ -90,4 +91,20 @@ label {
     gap: 12%;
     margin: auto 3%;
     justify-content: flex-end;
+    align-items: center;
+}
+
+.logout {
+    padding: 7px 23px;
+    background-color: black;
+    border: 0.5px solid white;
+    color: white;
+    border-radius: 7px;
+    transition: all 0.5s;
+}
+.logout:hover {
+    background-color: white;
+    border: 0.5px solid black;
+    color: black;
+    transition: all 0.5s;
 }
