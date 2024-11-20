@@ -110,7 +110,6 @@
             left: 106 * (day - date.getDay()),
             behavior: "smooth",
         });
-        console.log(day)
     </script>
 </body>
 
