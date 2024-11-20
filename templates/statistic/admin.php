@@ -29,12 +29,12 @@
                             <th></th>
                             <?php for ($i = 1; $i <= $days_count; $i++) { ?>
                                 <th class="center">
-                                    <?= 
-                                    $i . ', ' . TranslateUtils::translate_weekday(DateTime::createFromFormat(
-                                        "Y-m-d", 
-                                        "2024-$current_month-$i"
-                                    )->format("D"))
-                                    ?>
+                                    <?=
+                                        $i . ', ' . TranslateUtils::translate_weekday(DateTime::createFromFormat(
+                                            "Y-m-d",
+                                            "2024-$current_month-$i"
+                                        )->format("D"))
+                                        ?>
                                 </th>
                             <?php } ?>
                         </tr>
@@ -93,7 +93,8 @@
 
         document.querySelectorAll('.content_row__date').forEach(el => {
             el.addEventListener('click', () => {
-                window.location.replace(`http://10.174.246.199/report/statistic/edit/id=${el.id}`);
+                if (el.id != '')
+                    window.location.replace(`http://10.174.246.199/report/statistic/edit/id=${el.id}`);
             });
         });
 
