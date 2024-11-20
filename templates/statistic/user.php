@@ -10,6 +10,7 @@
 
 <body>
     <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/report/templates/header.php"); ?>
+    <?php require $_SERVER['DOCUMENT_ROOT'] . "/report/core/utils/Translate.php"; ?>
 
     <?php $days_count = cal_days_in_month(CAL_GREGORIAN, $current_month, date("Y")); ?>
 
@@ -37,7 +38,12 @@
                 <div class="employee_stat_container__item <?= $today == $i && $month == $current_month ? 'today' : '' ?>"
                     id="<?= $attendance_id ?>">
                     <div class="employee_stat_container__item_date">
-                        <?= $i ?>
+                        <?=
+                            $i . ', ' . TranslateUtils::translate_weekday(DateTime::createFromFormat(
+                                "Y-m-d",
+                                "2024-$current_month-$i"
+                            )->format("D"))
+                            ?>
                     </div>
                     <div class="employee_stat_container__item_content">
                         <?php
