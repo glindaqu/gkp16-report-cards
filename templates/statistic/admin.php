@@ -90,7 +90,8 @@
 
     <script>
         const menu = document.querySelector(".menu");
-
+        const date = new Date();
+        const day = date.getDate();
         document.querySelectorAll('.content_row__date').forEach(el => {
             el.addEventListener('click', () => {
                 if (el.id != '')
@@ -103,6 +104,13 @@
             let value = e.options[e.selectedIndex].value;
             window.location = "http://10.174.246.199/report/statistic/index/month=" + value;
         });
+
+        document.querySelector('.table_wrapper').scrollTo({
+            top: 0,
+            left: 106 * (day - date.getDay()),
+            behavior: "smooth",
+        });
+        console.log(day)
     </script>
 </body>
 
