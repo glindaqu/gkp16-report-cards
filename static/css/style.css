@@ -25,12 +25,12 @@ body {
 
 a {
     text-decoration: none;
-    color: black;
 }
 
 .header_logo {
     width: fit-content;
     display: flex;
+    color: black;
     margin: 1%;
     font-size: 1.9em;
     font-weight: bold;
@@ -97,14 +97,13 @@ label {
 .logout {
     padding: 7px 23px;
     background-color: black;
-    border: 0.5px solid white;
+    border: 1.5px solid black;
     color: white;
     border-radius: 7px;
     transition: all 0.5s;
 }
 .logout:hover {
     background-color: white;
-    border: 0.5px solid black;
     color: black;
     transition: all 0.5s;
 }

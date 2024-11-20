@@ -5,7 +5,7 @@ require_once "core/Application.php";
 /**
  * @var bool
  */
-const IS_DEBUG = true;
+const IS_DEBUG = false;
 
 if (IS_DEBUG) {
     ini_set('display_errors', '1');
