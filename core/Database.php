@@ -63,33 +63,40 @@ class Database
     #endregion users
 
     #region attendance
-    public function insert_attendance(?DateTime $income, ?DateTime $outcome, int $employee_id): void
+    public function insert_attendance(?DateTime $income, ?DateTime $outcome, int $employee_id, ?string $icnome_proof, ?string $outcome_proof): void
     {
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $query = "INSERT INTO attendance(income, outcome, employee_id, ip_address, income_proof, outcome_proof) VALUES (";
 
-        $outcome_str = NULL;
-        $income_str = NULL;
-
-        if ($outcome) {
-            $outcome_str = $outcome->format('Y-m-d H:i:s');
-        }
-        if ($income) {
-            $income_str = $income->format('Y-m-d H:i:s');
-        }
-
-        if ($income_str == NULL && $outcome_str == NULL) {
-            $this->db->query("INSERT INTO attendance(income, outcome, employee_id, ip_address, launch) VALUES 
-            (null, null, $employee_id, '$ip')");
-        } else if ($outcome_str == NULL) {
-            $this->db->query("INSERT INTO attendance(income, outcome, employee_id, ip_address, launch) VALUES 
-            ('$income_str', null, $employee_id, '$ip')");
-        } else if ($income_str == NULL) {
-            $this->db->query("INSERT INTO attendance(income, outcome, employee_id, ip_address, launch) VALUES 
-            (null, '$outcome_str', $employee_id, '$ip')");
+        if ($income != null) {
+            $d = $income->format("Y-m-d H:i:s");
+            $query .= "'$d'" . ', ';
         } else {
-            $this->db->query("INSERT INTO attendance(income, outcome, employee_id, ip_address, launch) VALUES 
-            ('$income_str', '$outcome_str', $employee_id, '$ip')");
+            $query .= 'NULL, ';
         }
+
+        if ($outcome != null) {
+            $d = $outcome->format("Y-m-d H:i:s");
+            $query .= "'$d'" . ', ';
+        } else {
+            $query .= 'NULL, ';
+        }
+
+        $addr = $_SERVER['REMOTE_ADDR'];
+        $query .= $employee_id . ', ';
+        $query .= "'$addr'" . ', ';
+
+        if ($icnome_proof != null) {
+            $query .= "'$icnome_proof'" . ', ';
+        } else {
+            $query .= 'NULL, ';
+        }
+
+        if ($outcome_proof != null) {
+            $query .= "'$outcome_proof'" . ')';
+        } else {
+            $query .= 'NULL)';
+        }
+        $this->db->query($query);
     }
 
     public function get_attendance(int $month): array

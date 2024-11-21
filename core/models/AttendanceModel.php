@@ -12,9 +12,9 @@ class AttendanceModel extends Model
         $this->db = new Database();
     }
 
-    public function add_attendance(int $employee_id, ?DateTime $in, ?DateTime $out): void
+    public function add_attendance(int $employee_id, ?DateTime $in, ?DateTime $out, ?string $icnome_proof, ?string $outcome_proof): void
     {
-        $this->db->insert_attendance($in, $out, $employee_id);
+        $this->db->insert_attendance($in, $out, $employee_id, $icnome_proof, $outcome_proof);
     }
 
     public function get_attendances(int $month): array

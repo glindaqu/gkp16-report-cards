@@ -14,7 +14,7 @@
     require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/header.php";
     $name = $employee['lastname'] . " " . $employee['name'] . " " . $employee['patronymic'];
     ?>
-    <form action="/report/attendance/add/date=<?= $date ?>" method="post">
+    <form action="/report/attendance/add/date=<?= $date ?>" method="post" enctype="multipart/form-data">
         <label>
             Имя сотрудника
             <select name="employee_id" id="employee_pick">
@@ -24,10 +24,22 @@
         <label>
             Время прихода
             <input type="time" name="income" id="income" />
+            <?php if ($role == 'admin') { ?>
+                <input type="file" name="income_proof">
+                <?php if ($row['income_proof'] != '') { ?>
+                    <a href="http://10.174.246.199/report/statistic/image/name=<?= $row['income_proof'] ?>">Сохраненное фото</a>
+                <?php } ?>
+            <?php } ?>
         </label>
         <label>
             Время ухода
             <input type="time" name="outcome" id="outcome" />
+            <?php if ($role == 'admin') { ?>
+                <input type="file" name="outcome_proof">
+                <?php if ($row['outcome_proof'] != '') { ?>
+                    <a href="http://10.174.246.199/report/statistic/image/name=<?= $row['outcome_proof'] ?>">Сохраненное фото</a>
+                <?php } ?>
+            <?php } ?>
         </label>
         <input type="submit" value="Добавить" />
     </form>

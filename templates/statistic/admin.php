@@ -27,13 +27,13 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <?php for ($i = 1; $i <= $days_count; $i++) { ?>
+                            <?php
+                            for ($i = 1; $i <= $days_count; $i++) {
+                                $formatted_date = DateTime::createFromFormat("Y-m-d", "2024-$current_month-$i");
+                                ?>
                                 <th class="center">
                                     <?=
-                                        $i . ', ' . TranslateUtils::translate_weekday(DateTime::createFromFormat(
-                                            "Y-m-d",
-                                            "2024-$current_month-$i"
-                                        )->format("D"))
+                                        $i . ', ' . TranslateUtils::translate_weekday($formatted_date->format("D"))
                                         ?>
                                 </th>
                             <?php } ?>
@@ -58,8 +58,10 @@
                                     if (is_numeric($index) && isset(($attendance_by_employee[$index]['id']))) {
                                         $div_id = $attendance_by_employee[$index]['id'];
                                     }
+                                    $formatted_date = DateTime::createFromFormat("Y-m-d", "2024-$current_month-$i");
                                     ?>
-                                    <td class="content_row__date" id="<?= $div_id ?>">
+                                    <td class="content_row__date" id="<?= $div_id ?>" data-user_id="<?= $employee['id'] ?>"
+                                        data-date="<?= $formatted_date->format('Y-m-d') ?>">
                                         <?php
                                         if (is_numeric($index)) {
                                             $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['income']);
@@ -92,10 +94,14 @@
         const menu = document.querySelector(".menu");
         const date = new Date();
         const day = date.getDate();
+
         document.querySelectorAll('.content_row__date').forEach(el => {
             el.addEventListener('click', () => {
-                if (el.id != '')
+                if (el.id != '') {
                     window.location.replace(`http://10.174.246.199/report/statistic/edit/id=${el.id}`);
+                } else {
+                    window.location.replace(`http://10.174.246.199/report/attendance/index/user_id=${el.dataset.user_id}&date=${el.dataset.date}`);
+                }
             });
         });
 
