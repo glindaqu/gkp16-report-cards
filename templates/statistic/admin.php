@@ -105,11 +105,15 @@
             window.location = "http://10.174.246.199/report/statistic/index/month=" + value;
         });
 
-        document.querySelector('.table_wrapper').scrollTo({
-            top: 0,
-            left: 106 * (day - date.getDay()),
-            behavior: "smooth",
-        });
+        const given_month = window.location.toString().split('=')[1];
+
+        if (given_month == date.getMonth() + 1 || given_month == null) {
+            document.querySelector('.table_wrapper').scrollTo({
+                top: 0,
+                left: 106 * (day - date.getDay()),
+                behavior: "smooth",
+            });
+        }
     </script>
 </body>
 
