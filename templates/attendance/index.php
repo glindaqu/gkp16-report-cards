@@ -14,6 +14,9 @@
     require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/header.php";
     $name = $employee['lastname'] . " " . $employee['name'] . " " . $employee['patronymic'];
     ?>
+
+    <a class="back" href="/report">Закрыть</a>
+
     <form action="/report/attendance/add/date=<?= $date ?>" method="post" enctype="multipart/form-data">
         <label>
             Имя сотрудника
