@@ -36,7 +36,7 @@
         </label>
         <label>
             Время ухода
-            <input type="time" name="outcome" id="outcome" />
+            <input type="time" name="outcome" id="outcome" value="<?= $employee['id'] == 1 ? '17:30' : '' ?>" />
             <?php if ($role == 'admin') { ?>
                 <input type="file" name="outcome_proof">
                 <?php if ($row['outcome_proof'] != '') { ?>

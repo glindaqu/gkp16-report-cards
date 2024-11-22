@@ -67,8 +67,11 @@
                                             $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['income']);
                                             $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['outcome']);
                                             $interval = NULL;
+                                            $time = strtotime($attendance[$index]['income']);
+                                            $time = $time + ($employee['launch'] * 60);
+                                            $date = DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d H:i:s", $time));
                                             if ($income_dt && $outcome_dt) {
-                                                $interval = $outcome_dt->diff($income_dt);
+                                                $interval = $outcome_dt->diff($date);
                                             }
                                             ?>
                                             <div class="time_section">
