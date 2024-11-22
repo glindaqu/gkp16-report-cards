@@ -112,7 +112,8 @@ class StatisticController extends Controller
         $this->attendance_model->update(
             $attendance_id,
             $income ?: null,
-            $outcome ?: null
+            $outcome ?: null,
+            $_POST['desc']
         );
         Logger::Log(
             "(edit) Посещаемость обновлена. 

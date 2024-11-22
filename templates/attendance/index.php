@@ -44,6 +44,10 @@
                 <?php } ?>
             <?php } ?>
         </label>
+        <label>
+            Примечания
+            <textarea name="desc"></textarea>
+        </label>
         <input type="submit" value="Добавить" />
     </form>
 

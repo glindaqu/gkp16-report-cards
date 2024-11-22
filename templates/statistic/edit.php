@@ -11,7 +11,7 @@
 <body>
 
     <?php require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/header.php"; ?>
-
+    <a class="back" href="/report">Закрыть</a>
     <form action="/report/statistic/rewrite" method="post" enctype="multipart/form-data">
         <input name="attendance_id" value="<?= $row['id'] ?>" style="display: none" />
         <label>
@@ -40,6 +40,10 @@
                     <a href="http://10.174.246.199/report/statistic/image/name=<?= $row['outcome_proof'] ?>">Сохраненное фото</a>
                 <?php } ?>
             <?php } ?>
+        </label>
+        <label>
+            Примечания
+            <textarea name="desc"><?= $row['description'] ?></textarea>
         </label>
         <input type="text" name="date" style="display: none;" value="<?= $income_dt->format("Y-m-d") ?>">
         <input type="submit" value="Сохранить" />

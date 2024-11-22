@@ -113,3 +113,7 @@ label {
     top: 50px;
     left: 50px;
 }
+
+textarea {
+    resize: vertical;
+}

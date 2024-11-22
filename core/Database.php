@@ -63,9 +63,9 @@ class Database
     #endregion users
 
     #region attendance
-    public function insert_attendance(?DateTime $income, ?DateTime $outcome, int $employee_id, ?string $icnome_proof, ?string $outcome_proof): void
+    public function insert_attendance(?DateTime $income, ?DateTime $outcome, int $employee_id, ?string $icnome_proof, ?string $outcome_proof, string $desc): void
     {
-        $query = "INSERT INTO attendance(income, outcome, employee_id, ip_address, income_proof, outcome_proof) VALUES (";
+        $query = "INSERT INTO attendance(income, outcome, employee_id, ip_address, income_proof, outcome_proof, description) VALUES (";
 
         if ($income != null) {
             $d = $income->format("Y-m-d H:i:s");
@@ -94,8 +94,11 @@ class Database
         if ($outcome_proof != null) {
             $query .= "'$outcome_proof'" . ')';
         } else {
-            $query .= 'NULL)';
+            $query .= 'NULL, ';
         }
+
+        $query .= "'$desc')";
+
         $this->db->query($query);
     }
 
@@ -139,18 +142,18 @@ class Database
         return $response->fetch_assoc();
     }
 
-    public function update_attendance_by_id(?DateTime $income, ?DateTime $outcome, int $attendance_id): void
+    public function update_attendance_by_id(?DateTime $income, ?DateTime $outcome, int $attendance_id, string $desc): void
     {
         $outcome_str = $outcome ? $outcome->format('Y-m-d H:i:s') : NULL;
         $income_str = $income ? $income->format('Y-m-d H:i:s') : NULL;
         if ($income_str == NULL && $outcome_str == NULL) {
-            $this->db->query("UPDATE attendance SET income=NULL, outcome=NULL WHERE id=$attendance_id");
+            $this->db->query("UPDATE attendance SET description='$desc', income=NULL, outcome=NULL WHERE id=$attendance_id");
         } else if ($income_str == NULL) {
-            $this->db->query("UPDATE attendance SET income=NULL, outcome='$outcome_str' WHERE id=$attendance_id");
+            $this->db->query("UPDATE attendance SET description='$desc', income=NULL, outcome='$outcome_str' WHERE id=$attendance_id");
         } else if ($outcome_str == NULL) {
-            $this->db->query("UPDATE attendance SET income='$income_str', outcome=NULL WHERE id=$attendance_id");
+            $this->db->query("UPDATE attendance SET description='$desc', income='$income_str', outcome=NULL WHERE id=$attendance_id");
         } else {
-            $this->db->query("UPDATE attendance SET income='$income_str', outcome='$outcome_str' WHERE id=$attendance_id");
+            $this->db->query("UPDATE attendance SET description='$desc', income='$income_str', outcome='$outcome_str' WHERE id=$attendance_id");
         }
     }
 

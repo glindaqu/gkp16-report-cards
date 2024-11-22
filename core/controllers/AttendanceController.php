@@ -61,6 +61,7 @@ class AttendanceController extends Controller
             $outcome ? $outcome : NULL,
             $_FILES['income_proof']['error'] == 0 ? $_FILES['income_proof']['name'] : null,
             $_FILES['outcome_proof']['error'] == 0 ? $_FILES['outcome_proof']['name'] : null,
+            $_POST['desc']
         );
         Logger::Log(
             "(add) Посещаемость добавлена. 
