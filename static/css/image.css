@@ -8,4 +8,6 @@ img {
     display: flex;
     margin: auto;
     overflow: scroll;
+    width: 100%;
+    height: 100%;
 }
