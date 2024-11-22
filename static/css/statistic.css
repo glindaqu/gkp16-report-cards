@@ -225,3 +225,7 @@ tbody tr:last-child>* {
 tr>*:last-child {
     border-right: 0;
 }
+
+.current {
+    background-color: #0000000d;
+}
