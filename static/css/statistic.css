@@ -42,6 +42,10 @@
     justify-content: center;
 }
 
+.content_row__date {
+    font-size: 0.85rem;
+}
+
 .menu {
     position: absolute;
     width: max-content;
@@ -94,6 +98,7 @@
     height: min-content;
     gap: 10px;
     margin-bottom: 3px;
+    font-size: 1.3rem;
 }
 
 .outcome,
@@ -183,16 +188,16 @@ thead tr>th:first-child {
 }
 
 .name {
-    min-width: 300px;
-    max-width: 300px;
+    min-width: max-content;
+    max-width: max-content;
     text-wrap: wrap;
 }
 
 th,
 td {
     height: 50px;
-    min-width: 85px;
-    max-width: 85px;
+    min-width: 105px;
+    max-width: 105px;
     border: 1px solid #ccc;
     border-width: 0 0 1px 1px;
     text-align: left;
