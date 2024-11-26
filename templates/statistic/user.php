@@ -87,7 +87,7 @@
                     let e = document.querySelector(".month_pick");
                     let month = e.options[e.selectedIndex].value;
                     let day = item;
-                    window.location = `http://10.174.246.199/report/attendance/index/date=${date.getFullYear()}-${month}-${item.childNodes[1].innerText}`;
+                    window.location = `http://10.174.246.199/report/attendance/index/date=${date.getFullYear()}-${month}-${item.childNodes[1].innerText.split(', ')[0]}`;
                 }
             });
         });
