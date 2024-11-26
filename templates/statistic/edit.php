@@ -15,6 +15,10 @@
     <form action="/report/statistic/rewrite" method="post" enctype="multipart/form-data">
         <input name="attendance_id" value="<?= $row['id'] ?>" style="display: none" />
         <label>
+            Дата
+            <input type="date"  value="<?= $income_dt->format("Y-m-d") ?>" readonly>
+        </label>
+        <label>
             Имя сотрудника
             <select id="employee_pick">
                 <option value="<?= $row['employee_id'] ?>"> <?= $name ?> </option>

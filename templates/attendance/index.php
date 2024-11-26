@@ -18,6 +18,10 @@
     <a class="back" href="/report">Закрыть</a>
 
     <form action="/report/attendance/add/date=<?= $date ?>" method="post" enctype="multipart/form-data">
+    <label>
+            Дата
+            <input value="<?= $date ?>" readonly type="date">
+        </label>
         <label>
             Имя сотрудника
             <select name="employee_id" id="employee_pick">
