@@ -27,13 +27,14 @@ class AuthorizeController extends Controller
 
     public function check(): void
     {
-        if (!isset($_POST['password']) || !isset($_POST['login'])) {
+        if (!isset($_POST['password']) || !isset($_POST['login']) || $_POST['password'] == '' || $_POST['login'] == '') {
             $this->error();
             exit;
         }
         $login = $_POST['login'];
         $password = $_POST['password'];
-        if (!($user = $this->user_model->get_user($login, $password))) {
+        $user = $this->user_model->get_user($login, $password);
+        if ($user == null || count($user) == 0) {
             $this->error();
             exit;
         }
@@ -53,11 +54,12 @@ class AuthorizeController extends Controller
         header("location: http://10.174.246.199/report/");
     }
 
-    public function logout(): void {
+    public function logout(): void
+    {
         unset($_COOKIE['user_id']);
         unset($_COOKIE['user_name']);
-        setcookie('user_id', '', -1, '/'); 
-        setcookie('user_name', '', -1, '/'); 
+        setcookie('user_id', '', -1, '/');
+        setcookie('user_name', '', -1, '/');
         header("location: http://10.174.246.199/report/");
     }
 

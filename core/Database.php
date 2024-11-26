@@ -56,7 +56,7 @@ class Database
         return $response->fetch_assoc();
     }
 
-    public function get_user(string $login, string $password): array
+    public function get_user(string $login, string $password): ?array
     {
         return $this->db->query("SELECT * FROM users WHERE login='$login' AND password='$password' LIMIT 1")->fetch_assoc();
     }
