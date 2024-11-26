@@ -35,7 +35,7 @@
                     $attendance_id = $attendance[$index]['id'];
                 }
                 ?>
-                <div class="employee_stat_container__item <?= $today == $i && $month == $current_month ? 'today' : '' ?>"
+                <div class="employee_stat_container__item <?= $attendance[$index]['description'] != null ? 'core_highlight' : '' ?> <?= $today == $i && $month == $current_month ? 'today' : '' ?>"
                     id="<?= $attendance_id ?>">
                     <div class="employee_stat_container__item_date">
                         <?=

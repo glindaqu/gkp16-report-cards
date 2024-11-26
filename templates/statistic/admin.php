@@ -60,7 +60,7 @@
                                     }
                                     $formatted_date = DateTime::createFromFormat("Y-m-d", "2024-$current_month-$i")->format('Y-m-d');
                                     ?>
-                                    <td class="content_row__date <?= $formatted_date == date('Y-m-d') ? 'current' : '' ?>" id="<?= $div_id ?>" data-user_id="<?= $employee['id'] ?>"
+                                    <td class="content_row__date <?= $attendance_by_employee[$index]['description'] == null ? '' : 'core_highlight' ?> <?= $formatted_date == date('Y-m-d') ? 'current' : '' ?>" id="<?= $div_id ?>" data-user_id="<?= $employee['id'] ?>"
                                         data-date="<?= $formatted_date ?>">
                                         <?php
                                         if (is_numeric($index)) {

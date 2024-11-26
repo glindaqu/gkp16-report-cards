@@ -46,6 +46,10 @@
     font-size: 0.85rem;
 }
 
+.core_highlight {
+    background-image: linear-gradient(225deg, green, green 5px, transparent 10px, transparent);
+}
+
 .menu {
     position: absolute;
     width: max-content;
