@@ -69,7 +69,7 @@ class AttendanceController extends Controller
                                 Outcome: $outcome_time 
                                 Date: $date"
         );
-        $month = $income->format("m");
+        $month = DateTime::createFromFormat('Y-m-d', $date)->format('m');
         header("location: http://10.174.246.199/report/statistic/index/month=$month");
     }
 }

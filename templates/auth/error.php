@@ -1,1 +1,3 @@
-error has been occurred
+<p>
+    Неверный логин или пароль. <a href="/report">Попробуйте еще раз</a>
+</p>
