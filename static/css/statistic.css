@@ -103,11 +103,13 @@
     gap: 10px;
     margin-bottom: 3px;
     font-size: 1.3rem;
+    pointer-events: none;
 }
 
 .outcome,
 .income {
     font-size: 0.8em;
+    pointer-events: none;
 }
 
 .ip {
@@ -237,4 +239,16 @@ tr>*:last-child {
 
 .current {
     background-color: #0000000d;
+}
+
+.date_desc {
+    position: absolute;
+    z-index: 999;
+    display: block;
+    padding: 10px;
+    background-color: rgb(237, 236, 236);
+}
+
+.hide {
+    display: none;
 }

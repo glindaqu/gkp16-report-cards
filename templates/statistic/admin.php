@@ -14,6 +14,8 @@
     <?php require $_SERVER['DOCUMENT_ROOT'] . "/report/core/utils/Translate.php"; ?>
     <?php $days_count = cal_days_in_month(CAL_GREGORIAN, $current_month, date("Y")); ?>
 
+    <div class="date_desc hide">qqq</div>
+
     <div class="container">
         <div class="content">
             <select class="month_pick">
@@ -60,7 +62,8 @@
                                     }
                                     $formatted_date = DateTime::createFromFormat("Y-m-d", "2024-$current_month-$i")->format('Y-m-d');
                                     ?>
-                                    <td class="content_row__date <?= $attendance_by_employee[$index]['description'] == null ? '' : 'core_highlight' ?> <?= $formatted_date == date('Y-m-d') ? 'current' : '' ?>" id="<?= $div_id ?>" data-user_id="<?= $employee['id'] ?>"
+                                    <td class="content_row__date <?= $attendance_by_employee[$index]['description'] == null ? '' : 'core_highlight' ?> <?= $formatted_date == date('Y-m-d') ? 'current' : '' ?>"
+                                        id="<?= $div_id ?>" data-user_id="<?= $employee['id'] ?>" data-desc="<?= $attendance_by_employee[$index]['description'] ?>"
                                         data-date="<?= $formatted_date ?>">
                                         <?php
                                         if (is_numeric($index)) {
@@ -123,6 +126,20 @@
                 behavior: "smooth",
             });
         }
+
+        const descBlock = document.querySelector('.date_desc');
+
+        document.querySelectorAll('.core_highlight').forEach(element => {
+            element.addEventListener('mouseenter', event => {
+                descBlock.classList.remove('hide');
+                descBlock.style.top = event.clientY + 'px';
+                descBlock.style.left = event.clientX + 'px';
+                descBlock.innerHTML = element.dataset.desc;
+            });
+            element.addEventListener('mouseleave', () => {
+                descBlock.classList.add('hide');
+            })
+        });
     </script>
 </body>
 
