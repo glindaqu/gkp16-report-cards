@@ -99,6 +99,8 @@ class StatisticController extends Controller
         }
         $old_date = DateTime::createFromFormat("Y-m-d H:i:s", $old_row['income'])->format('Y-m-d');
 
+        $target_employee = $old_row['employee_id'];
+
         if (isset($_FILES['income_proof']) && $_FILES['income_proof']['error'] == 0) {
             move_uploaded_file($_FILES["income_proof"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . '/report/temp/' . $_FILES["income_proof"]["name"]);
             $this->attendance_model->add_attendance_proof('income', $_FILES['income_proof']['name'], $old_row['id']);
@@ -119,9 +121,10 @@ class StatisticController extends Controller
             "(edit) Посещаемость обновлена. 
                                 Income: old=$old_income_str, new=$income_time
                                 Outcome: old=$old_outcome_str, new=$outcome_time 
+                                Target User: $target_employee
                                 Date: old=$old_date, new=$date"
         );
-        header("location: http://10.174.246.199/report/");
+        header("location: http://10.174.246.199/report");  
     }
 
     public function image(array $params): void {

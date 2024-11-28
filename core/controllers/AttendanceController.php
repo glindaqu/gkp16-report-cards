@@ -67,6 +67,7 @@ class AttendanceController extends Controller
             "(add) Посещаемость добавлена. 
                                 Income: $income_time
                                 Outcome: $outcome_time 
+                                Target User: $employee_id
                                 Date: $date"
         );
         $month = DateTime::createFromFormat('Y-m-d', $date)->format('m');
