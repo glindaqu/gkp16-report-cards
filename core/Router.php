@@ -18,7 +18,7 @@ class Router
 
         $given_action = "";
 
-        if (isset($splitted[3])) {
+        if (isset($splitted[3]) && $splitted[3] != '') {
             $given_action = trim($splitted[3]);
         }
 
