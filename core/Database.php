@@ -107,7 +107,18 @@ class Database
         $days_count = cal_days_in_month(CAL_GREGORIAN, $month, date("Y"));
         $year = date("Y");
         $result = [];
-        $response = $this->db->query("SELECT * FROM attendance WHERE income >= '$year-$month-01 00:00:00' AND income <= '$year-$month-$days_count 23:59:59'");
+        $response = $this->db->query(
+            "SELECT 
+                        * 
+                    FROM 
+                        attendance 
+                    WHERE 
+                            (income >= '$year-$month-01 00:00:00' 
+                        AND 
+                            income <= '$year-$month-$days_count 23:59:59')
+                        OR
+                            date BETWEEN '$year-$month-01' AND '$year-$month-$days_count'
+                    ");
         while ($item = $response->fetch_assoc()) {
             $result[] = $item;
         }

@@ -52,7 +52,7 @@
                                 <?php for ($i = 1; $i <= $days_count; $i++) { ?>
                                     <?php
                                     $index = array_search($i, array_map(function ($item): string {
-                                        return DateTime::createFromFormat("Y-m-d H:i:s", $item['income'])->format("d");
+                                        return DateTime::createFromFormat("Y-m-d", $item['date'])->format("d");
                                     }, $attendance_by_employee));
                                     $div_id = '';
                                     if (is_numeric($index) && isset(($attendance_by_employee[$index]['id']))) {
