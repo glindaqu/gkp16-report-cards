@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/report/core/View.php";
 
 class StatisticView extends View
 {
-    public function admin(array $employes, array $attendance, array $months, int $current_month): void
+    public function admin(array $employes, array $attendance, array $months, int $current_month, int $current_year): void
     {
         $role = "admin";
         ob_start();

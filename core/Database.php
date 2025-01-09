@@ -102,10 +102,10 @@ class Database
         $this->db->query($query);
     }
 
-    public function get_attendance(int $month): array
+    public function get_attendance(int $month, ?int $year): array
     {
         $days_count = cal_days_in_month(CAL_GREGORIAN, $month, date("Y"));
-        $year = date("Y");
+        $year = $year == null ? date("Y") : $year;
         $result = [];
         $response = $this->db->query(
             "SELECT 

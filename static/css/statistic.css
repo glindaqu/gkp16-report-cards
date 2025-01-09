@@ -88,10 +88,12 @@
     width: 930px;
 }
 
+.year_pick,
 .month_pick {
     width: 20%;
     padding: 10px 15px;
-    margin: 2% 1%;
+    margin-left: 1%;
+    margin-bottom: 1%;
     border: none;
     border-radius: 7px;
 }

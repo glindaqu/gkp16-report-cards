@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/report/static/css/style.css">
 
 <header>
-    <a href="/report/" class="header_logo">
+    <a href="/report" class="header_logo">
         Report
     </a>
     <div class="header_group">

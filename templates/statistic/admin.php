@@ -23,6 +23,11 @@
                     <option value="<?= $id ?>" <?= $id == $current_month ? 'selected' : '' ?>><?= $month ?></option>
                 <?php } ?>
             </select>
+            <select class="year_pick">
+                <?php for ($i = 2024; $i <= date("Y"); $i++) { ?>
+                    <option value="<?= $i ?>" <?= $i == $current_year ? 'selected' : '' ?>><?= $i ?></option>
+                <?php } ?>
+            </select>
 
             <div class="table_wrapper">
                 <table>
@@ -32,11 +37,11 @@
                             <?php
                             for ($i = 1; $i <= $days_count; $i++) {
                                 $formatted_date = DateTime::createFromFormat("Y-m-d", "2024-$current_month-$i");
-                                ?>
+                            ?>
                                 <th class="center">
                                     <?=
-                                        $i . ', ' . TranslateUtils::translate_weekday($formatted_date->format("D"))
-                                        ?>
+                                    $i . ', ' . TranslateUtils::translate_weekday($formatted_date->format("D"))
+                                    ?>
                                 </th>
                             <?php } ?>
                         </tr>
@@ -63,25 +68,25 @@
                                     $formatted_date = DateTime::createFromFormat("Y-m-d", "2024-$current_month-$i")->format('Y-m-d');
                                     ?>
                                     <td class="content_row__date <?= $attendance_by_employee[$index]['description'] == null ? '' : 'core_highlight' ?> <?= $formatted_date == date('Y-m-d') ? 'current' : '' ?>"
-                                        id="<?= $div_id ?>" data-user_id="<?= $employee['id'] ?>" data-desc="<?= $attendance_by_employee[$index]['description'] ?>"
+                                        id="<?= $div_id ?>" data-user_id="<?= $employee['id'] ?>"
+                                        data-desc="<?= $attendance_by_employee[$index]['description'] ?>"
                                         data-date="<?= $formatted_date ?>">
                                         <?php
                                         if (is_numeric($index)) {
                                             $income_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['income']);
                                             $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $attendance_by_employee[$index]['outcome']);
                                             $interval = NULL;
-                                            $time = strtotime($attendance[$index]['income']);
-                                            $time = $time + ($employee['launch'] * 60);
-                                            $date = DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d H:i:s", $time));
+                                            $time = strtotime($attendance_by_employee[$index]['income']);
+                                            $time += ($employee['launch'] * 60);
                                             if ($income_dt && $outcome_dt) {
-                                                $interval = $outcome_dt->diff($date);
+                                                $interval = $outcome_dt->diff(DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d H:i:s", $time)));
                                             }
-                                            ?>
+                                        ?>
                                             <div class="time_section">
                                                 <div class="income"><?= $income_dt ? $income_dt->format("H:i") : "NULL" ?> </div>
                                                 <div class="outcome"><?= $outcome_dt ? $outcome_dt->format("H:i") : "NULL" ?></div>
                                             </div>
-                                            <?= $interval ? sprintf("%02d:%02d", $interval->h, $interval->i) : "NULL" ?>
+                                            <?= $interval != null ? sprintf("%02d:%02d", $interval->h, $interval->i) : "NULL" ?>
                                         <?php } ?>
                                     </td>
                                 <?php } ?>
@@ -91,7 +96,6 @@
                 </table>
             </div>
         </div>
-    </div>
     </div>
 
     <?php require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/footer.php"; ?>
@@ -112,9 +116,19 @@
         });
 
         document.querySelector(".month_pick").addEventListener("change", () => {
-            let e = document.querySelector(".month_pick");
-            let value = e.options[e.selectedIndex].value;
-            window.location = "http://10.174.246.199/report/statistic/index/month=" + value;
+            let m = document.querySelector(".month_pick");
+            let y = document.querySelector(".year_pick");
+            let month = m.options[m.selectedIndex].value;
+            let year = y.options[y.selectedIndex].value;
+            window.location = `http://10.174.246.199/report/statistic/index/year=${year}&month=${month}`;
+        });
+
+        document.querySelector(".year_pick").addEventListener("change", () => {
+            let m = document.querySelector(".month_pick");
+            let y = document.querySelector(".year_pick");
+            let month = m.options[m.selectedIndex].value;
+            let year = y.options[y.selectedIndex].value;
+            window.location = `http://10.174.246.199/report/statistic/index/year=${year}&month=${month}`;
         });
 
         const given_month = window.location.toString().split('=')[1];

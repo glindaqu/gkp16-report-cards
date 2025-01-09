@@ -41,11 +41,13 @@ class StatisticController extends Controller
         }
         $employee = $this->user_model->get_user_by_id($_COOKIE['user_id']);
         if ($employee['role'] == "admin") {
+            $year = isset($params['year']) ? $params['year'] : date("Y");
             $this->view->admin(
                 $this->user_model->get_users(),
-                $this->attendance_model->get_attendances($month),
+                $this->attendance_model->get_attendances($month, $year),
                 $months,
-                $month
+                $month,
+                $year
             );
         } else if ($employee['role'] == "employee") {
             $this->view->user(

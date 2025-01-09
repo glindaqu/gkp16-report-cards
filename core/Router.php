@@ -37,6 +37,7 @@ class Router
         }
 
         $this->navigate($params);
+        // echo $this->route_dump();
     }
 
     public function navigate(array $params): void
