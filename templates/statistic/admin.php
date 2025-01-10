@@ -12,7 +12,7 @@
 
     <?php require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/header.php"; ?>
     <?php require $_SERVER['DOCUMENT_ROOT'] . "/report/core/utils/Translate.php"; ?>
-    <?php $days_count = cal_days_in_month(CAL_GREGORIAN, $current_month, date("Y")); ?>
+    <?php $days_count = cal_days_in_month(CAL_GREGORIAN, $current_month, $current_year); ?>
 
     <div class="date_desc hide">qqq</div>
 
@@ -36,7 +36,7 @@
                             <th></th>
                             <?php
                             for ($i = 1; $i <= $days_count; $i++) {
-                                $formatted_date = DateTime::createFromFormat("Y-m-d", "2024-$current_month-$i");
+                                $formatted_date = DateTime::createFromFormat("Y-m-d", "$current_year-$current_month-$i");
                             ?>
                                 <th class="center">
                                     <?=

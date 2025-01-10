@@ -41,7 +41,7 @@
                         <?=
                             $i . ', ' . TranslateUtils::translate_weekday(DateTime::createFromFormat(
                                 "Y-m-d",
-                                "2024-$current_month-$i"
+                                date("Y") . "-$current_month-$i"
                             )->format("D"))
                             ?>
                     </div>
