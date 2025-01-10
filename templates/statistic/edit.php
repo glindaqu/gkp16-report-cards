@@ -16,7 +16,7 @@
         <input name="attendance_id" value="<?= $row['id'] ?>" style="display: none" />
         <label>
             Дата
-            <input type="date"  value="<?= $income_dt->format("Y-m-d") ?>" readonly>
+            <input type="date" value="<?= $income_dt->format("Y-m-d") ?>" readonly>
         </label>
         <label>
             Имя сотрудника
@@ -41,7 +41,8 @@
             <?php if ($role == 'admin') { ?>
                 <input type="file" name="outcome_proof">
                 <?php if ($row['outcome_proof'] != '') { ?>
-                    <a href="http://10.174.246.199/report/statistic/image/name=<?= $row['outcome_proof'] ?>">Сохраненное фото</a>
+                    <a href="http://10.174.246.199/report/statistic/image/name=<?= $row['outcome_proof'] ?>">Сохраненное
+                        фото</a>
                 <?php } ?>
             <?php } ?>
         </label>

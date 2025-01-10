@@ -18,7 +18,7 @@
     <a class="back" href="/report">Закрыть</a>
 
     <form action="/report/attendance/add/date=<?= $date ?>" method="post" enctype="multipart/form-data">
-    <label>
+        <label>
             Дата
             <input value="<?= $date ?>" readonly type="date">
         </label>
@@ -44,7 +44,8 @@
             <?php if ($role == 'admin') { ?>
                 <input type="file" name="outcome_proof">
                 <?php if ($row['outcome_proof'] != '') { ?>
-                    <a href="http://10.174.246.199/report/statistic/image/name=<?= $row['outcome_proof'] ?>">Сохраненное фото</a>
+                    <a href="http://10.174.246.199/report/statistic/image/name=<?= $row['outcome_proof'] ?>">Сохраненное
+                        фото</a>
                 <?php } ?>
             <?php } ?>
         </label>

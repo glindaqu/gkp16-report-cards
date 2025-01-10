@@ -32,7 +32,8 @@ class StatisticView extends View
         echo $content;
     }
 
-    public function image(string $name): void {
+    public function image(string $name): void
+    {
         ob_start();
         require $_SERVER['DOCUMENT_ROOT'] . "/report/templates/statistic/image.php";
         $content = ob_get_contents();

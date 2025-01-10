@@ -118,7 +118,8 @@ class Database
                             income <= '$year-$month-$days_count 23:59:59')
                         OR
                             date BETWEEN '$year-$month-01' AND '$year-$month-$days_count'
-                    ");
+                    "
+        );
         while ($item = $response->fetch_assoc()) {
             $result[] = $item;
         }

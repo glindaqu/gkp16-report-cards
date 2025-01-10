@@ -37,11 +37,11 @@
                             <?php
                             for ($i = 1; $i <= $days_count; $i++) {
                                 $formatted_date = DateTime::createFromFormat("Y-m-d", "$current_year-$current_month-$i");
-                            ?>
+                                ?>
                                 <th class="center">
                                     <?=
-                                    $i . ', ' . TranslateUtils::translate_weekday($formatted_date->format("D"))
-                                    ?>
+                                        $i . ', ' . TranslateUtils::translate_weekday($formatted_date->format("D"))
+                                        ?>
                                 </th>
                             <?php } ?>
                         </tr>
@@ -81,7 +81,7 @@
                                             if ($income_dt && $outcome_dt) {
                                                 $interval = $outcome_dt->diff(DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d H:i:s", $time)));
                                             }
-                                        ?>
+                                            ?>
                                             <div class="time_section">
                                                 <div class="income"><?= $income_dt ? $income_dt->format("H:i") : "NULL" ?> </div>
                                                 <div class="outcome"><?= $outcome_dt ? $outcome_dt->format("H:i") : "NULL" ?></div>

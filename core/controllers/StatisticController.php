@@ -70,10 +70,10 @@ class StatisticController extends Controller
         $outcome_dt = DateTime::createFromFormat("Y-m-d H:i:s", $row['outcome']);
 
         $this->view->edit(
-            $name, 
-            $income_dt ?: null, 
-            $outcome_dt ?: null, 
-            $row, 
+            $name,
+            $income_dt ?: null,
+            $outcome_dt ?: null,
+            $row,
             $this->user_model->get_user_role($_COOKIE['user_id'])
         );
     }
@@ -126,10 +126,11 @@ class StatisticController extends Controller
                                 Target User: $target_employee
                                 Date: old=$old_date, new=$date"
         );
-        header("location: http://10.174.246.199/report");  
+        header("location: http://10.174.246.199/report");
     }
 
-    public function image(array $params): void {
+    public function image(array $params): void
+    {
         if (isset($params['name'])) {
             $this->view->image($params['name']);
         }
