@@ -65,7 +65,7 @@
                                     if (is_numeric($index) && isset(($attendance_by_employee[$index]['id']))) {
                                         $div_id = $attendance_by_employee[$index]['id'];
                                     }
-                                    $formatted_date = DateTime::createFromFormat("Y-m-d", "2024-$current_month-$i")->format('Y-m-d');
+                                    $formatted_date = DateTime::createFromFormat("Y-m-d", "$current_year-$current_month-$i")->format('Y-m-d');
                                     ?>
                                     <td class="content_row__date <?= $attendance_by_employee[$index]['description'] == null ? '' : 'core_highlight' ?> <?= $formatted_date == date('Y-m-d') ? 'current' : '' ?>"
                                         id="<?= $div_id ?>" data-user_id="<?= $employee['id'] ?>"
